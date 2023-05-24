@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:start_flutter/hw6m2.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
         initialRoute: "/",
         routes: {
           "/": (context) => const MyHomePage(),
+          "/hw6m2": (context) => const Hw6m2(),
         });
   }
 }
@@ -31,29 +33,30 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          body: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(50),
+          child: Column(
               children: [
-                Row(
-                  children: [
-                    const Text("2month"),
-                    const SizedBox(width: 20,),
-                    TextButton(
-                        style: TextButton.styleFrom(
-                            backgroundColor: Colors.grey,
-                            foregroundColor: Colors.black),
-                        onPressed: () {},
-                        child: const Text(
-                          "hw6",
-                        ))
-                  ],
-                )
-              ],
-            ),
-          ),
-        ));
+          Row(
+          children: [
+          const Text("2month"),
+          const SizedBox(width: 20,),
+          TextButton(
+              style: TextButton.styleFrom(
+                  backgroundColor: Colors.grey,
+                  foregroundColor: Colors.black),
+              onPressed: () {
+                Navigator.pushNamed(context, "/hw6m2");
+              },
+              child: const Text(
+                "hw6",
+              ))
+          ],
+        ),],
+        ),
+      ),
+    ),);
   }
 }
