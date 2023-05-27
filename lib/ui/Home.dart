@@ -25,6 +25,17 @@ class Home extends StatelessWidget {
                     },
                     child: const Text(
                       "hw6",
+                    )),
+
+                TextButton(
+                    style: TextButton.styleFrom(
+                        backgroundColor: Colors.grey,
+                        foregroundColor: Colors.black),
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/hw7m2");
+                    },
+                    child: const Text(
+                      "hw7",
                     ))
               ],
             ),
