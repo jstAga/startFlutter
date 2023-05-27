@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:start_flutter/ui/Home.dart';
 import 'package:start_flutter/ui/geekTech/2month/hw6m2.dart';
 import 'package:start_flutter/ui/geekTech/2month/hw7m2.dart';
+import 'package:start_flutter/ui/others/telegram_settings.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -11,6 +12,7 @@ class App extends StatelessWidget {
     const Home home = Home();
     const Hw6m2 hw6m2 = Hw6m2();
     const Hw7m2 hw7m2 = Hw7m2();
+    TelegramSettings telegramSettings = TelegramSettings();
     return MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
@@ -19,6 +21,7 @@ class App extends StatelessWidget {
           "/": (context) => home,
           "/hw6m2": (context) => hw6m2,
           "/hw7m2": (context) => hw7m2,
+          "/telegramSettings": (context) => telegramSettings,
         });
   }
 }

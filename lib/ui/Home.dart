@@ -26,7 +26,6 @@ class Home extends StatelessWidget {
                     child: const Text(
                       "hw6",
                     )),
-
                 TextButton(
                     style: TextButton.styleFrom(
                         backgroundColor: Colors.grey,
@@ -39,6 +38,15 @@ class Home extends StatelessWidget {
                     ))
               ],
             ),
+            Row(
+              children: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/telegramSettings");
+                    },
+                    child: const Text("telegramSettings"))
+              ],
+            )
           ],
         ),
       ),
