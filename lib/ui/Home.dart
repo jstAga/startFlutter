@@ -44,7 +44,12 @@ class Home extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushNamed(context, "/telegramSettings");
                     },
-                    child: const Text("telegramSettings"))
+                    child: const Text("telegramSettings")),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/authTheMovieDB");
+                    },
+                    child: const Text("authTheMovieDB"))
               ],
             )
           ],
