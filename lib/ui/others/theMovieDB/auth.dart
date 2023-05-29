@@ -83,7 +83,7 @@ class _LoginFormState extends State<_LoginForm> {
   void _auth() {
     if (_usernameTextController.text == "admin" &&
         _passwordTextController.text == "admin") {
-      print("ook");
+      Navigator.of(context).pushNamed("/homeTheMovieDB");
     } else {
       print("error");
     }

@@ -47,4 +47,6 @@ class Constants {
       )),
       foregroundColor:
       MaterialStateProperty.all(Constants.theMovieDbBlue));
+
+  static const String theMovieDbHomeTitle = "TMDB";
 }
