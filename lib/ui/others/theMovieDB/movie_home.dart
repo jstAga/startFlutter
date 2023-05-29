@@ -12,13 +12,6 @@ class MovieHome extends StatefulWidget {
 class _MovieHomeState extends State<MovieHome> {
   int _selectedTab = 0;
 
-
-  static final List<Widget> _bottomNav = [
-    const Movies(),
-    const Text("Home"),
-    const Text("Tv shows")
-  ];
-
   void _onSelectedTab(int index) {
     if (_selectedTab == index) return;
     setState(() {
@@ -42,8 +35,9 @@ class _MovieHomeState extends State<MovieHome> {
         ],
         onTap: _onSelectedTab,
       ),
-      body: Center(
-        child: _bottomNav[_selectedTab],
+      body: IndexedStack(
+        index: _selectedTab,
+        children: [Movies(), const Text("Home"), const Text("Tv shows")],
       ),
     );
   }
