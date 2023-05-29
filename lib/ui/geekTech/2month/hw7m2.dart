@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/ui/geekTech/utils/Constants.dart';
+import 'package:start_flutter/resources/Constants.dart';
 
 class Hw7m2 extends StatefulWidget {
   const Hw7m2({Key? key}) : super(key: key);

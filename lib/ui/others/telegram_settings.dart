@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/ui/geekTech/utils/Constants.dart';
+import 'package:start_flutter/resources/Constants.dart';
 
 class TelegramSettings extends StatelessWidget {
   final List<_MenuRowData> _mainMenuRowData = [

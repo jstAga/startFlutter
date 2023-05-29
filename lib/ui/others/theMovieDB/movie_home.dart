@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/ui/geekTech/utils/Constants.dart';
+import 'package:start_flutter/resources/Constants.dart';
 
 class MovieHome extends StatefulWidget {
   const MovieHome({Key? key}) : super(key: key);
@@ -10,12 +10,31 @@ class MovieHome extends StatefulWidget {
 
 class _MovieHomeState extends State<MovieHome> {
   int _selectedTab = 1;
+  final TextEditingController controller = TextEditingController();
 
-  static const List<Widget> _bottomNav = [
-    Text("Movies"),
-    Text("Home"),
-    Text("Tv shows")
-  ];
+  
+  void _onChanged(String text) {
+    setState(() {
+      print("t $text");
+    });
+  }
+
+  void _onSubmitted() {
+    print("editing complete");
+  }
+
+  // static final List<Widget> _bottomNav = [
+  //   const Text("Movies"),
+  //    TextField(
+  //     controller: controller,
+  //     decoration: InputDecoration(
+  //         focusedBorder:
+  //             OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+  //         border:
+  //             OutlineInputBorder(borderSide: BorderSide(color: Colors.black))),
+  //   ),
+  //   const Text("Tv shows")
+  // ];
 
   void _onSelectedTab(int index) {
     if (_selectedTab == index) return;
@@ -40,8 +59,19 @@ class _MovieHomeState extends State<MovieHome> {
         ],
         onTap: _onSelectedTab,
       ),
-      body: Center(
-        child: _bottomNav[_selectedTab],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Center(
+          child: Column(
+            children: [
+              TextField(
+                onEditingComplete: _onSubmitted,
+              ),
+              SizedBox(height: 20),
+              TextField()
+            ],
+          ),
+        ),
       ),
     );
   }

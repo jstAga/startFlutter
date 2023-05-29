@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:start_flutter/ui/geekTech/utils/Ext.dart';
+import 'package:start_flutter/resources/Ext.dart';
 
 class Constants {
   //hw7m2

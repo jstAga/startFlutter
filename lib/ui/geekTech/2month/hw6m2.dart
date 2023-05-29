@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:start_flutter/resources/resources.dart';
 
 class Hw6m2 extends StatefulWidget {
   const Hw6m2({super.key});
@@ -15,7 +16,7 @@ class _Hw6m2 extends State<StatefulWidget> {
         padding: const EdgeInsets.all(32),
         decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("images/bg_hw6_m2.jpeg"),
+                image: AssetImage(Images.bgHw6M2),
                 fit: BoxFit.fitHeight)),
         child: const Scaffold(
           backgroundColor: Colors.transparent,
