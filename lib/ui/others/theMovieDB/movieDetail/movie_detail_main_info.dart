@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/resources/resources.dart';
 import 'package:start_flutter/ui/others/theMovieDB/movies/movies.dart';
 
 class MovieDetailMainInfo extends StatelessWidget {
@@ -55,9 +54,7 @@ class _Score extends StatelessWidget {
 }
 
 class _ActorsInfo extends StatelessWidget {
-  const _ActorsInfo({
-    super.key,
-  });
+  const _ActorsInfo();
 
   @override
   build(BuildContext context) {

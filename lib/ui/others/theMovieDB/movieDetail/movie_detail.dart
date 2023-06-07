@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:start_flutter/resources/Constants.dart';
 import 'package:start_flutter/ui/others/theMovieDB/movieDetail/movie_detail_main_info.dart';
+import 'package:start_flutter/ui/others/theMovieDB/movieDetail/movie_detail_screen_cast.dart';
 import 'package:start_flutter/ui/others/theMovieDB/movies/movies.dart';
 
 class MovieDetail extends StatefulWidget {
@@ -24,9 +25,9 @@ class _MovieDetailState extends State<MovieDetail> {
         color: const Color.fromRGBO(24, 22, 27, 1),
         child: ListView(
           children: [
-            MovieDetailMainInfo(
-              movieModel: movieModel,
-            )
+            MovieDetailMainInfo(movieModel: movieModel),
+            const SizedBox(height: 20),
+            const MovieDetailScreenCast()
           ],
         ),
       ),
