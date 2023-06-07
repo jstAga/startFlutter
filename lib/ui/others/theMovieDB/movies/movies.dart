@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:start_flutter/resources/Constants.dart';
 
 class MovieModel {
+  final int id;
   final String imageName;
   final String title;
   final String time;
   final String description;
 
   MovieModel(
-      {required this.imageName,
+      {required this.id,
+      required this.imageName,
       required this.title,
       required this.time,
       required this.description});
@@ -45,6 +47,11 @@ class _MoviesState extends State<Movies> {
     _searchController.addListener(() {
       _searchMovies();
     });
+  }
+
+  void _onMovieTap(int index) {
+    Navigator.pushNamed(context, "/homeTheMovieDB/movieDetail",
+        arguments: _filteredMovies[index].id);
   }
 
   @override
@@ -116,7 +123,7 @@ class _MoviesState extends State<Movies> {
                       color: Colors.transparent,
                       child: InkWell(
                         borderRadius: BorderRadius.circular(12),
-                        onTap: () {},
+                        onTap: () => _onMovieTap(index),
                       ),
                     )
                   ],

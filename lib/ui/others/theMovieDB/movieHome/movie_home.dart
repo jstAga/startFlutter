@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:start_flutter/resources/Constants.dart';
-import 'package:start_flutter/ui/others/theMovieDB/movies.dart';
+import 'package:start_flutter/ui/others/theMovieDB/movies/movies.dart';
 
 class MovieHome extends StatefulWidget {
   const MovieHome({Key? key}) : super(key: key);

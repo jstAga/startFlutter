@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/ui/Home.dart';
+
+// import 'package:start_flutter/ui/Home.dart';
 import 'package:start_flutter/ui/geekTech/2month/hw6m2.dart';
 import 'package:start_flutter/ui/geekTech/2month/hw7m2.dart';
 import 'package:start_flutter/resources/Constants.dart';
 import 'package:start_flutter/ui/others/telegram_settings.dart';
-import 'package:start_flutter/ui/others/theMovieDB/auth.dart';
-import 'package:start_flutter/ui/others/theMovieDB/movie_home.dart';
+import 'package:start_flutter/ui/others/theMovieDB/auth/auth.dart';
+import 'package:start_flutter/ui/others/theMovieDB/movieDetail/movie_detail.dart';
+import 'package:start_flutter/ui/others/theMovieDB/movieHome/movie_home.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const Home home = Home();
+    // const Home home = Home();
     const Hw6m2 hw6m2 = Hw6m2();
     const Hw7m2 hw7m2 = Hw7m2();
 
@@ -32,6 +34,13 @@ class App extends StatelessWidget {
         "/telegramSettings": (context) => telegramSettings,
         "/authTheMovieDB": (context) => authTheMovieDb,
         "/homeTheMovieDB": (context) => movieHome,
+        "/homeTheMovieDB/movieDetail": (context) {
+          final argument = ModalRoute.of(context)?.settings.arguments;
+          if (argument is int) {
+            return MovieDetail(id: argument);
+          }
+          return const MovieDetail(id: 0);
+        }
       },
       theme: ThemeData(
           appBarTheme: const AppBarTheme(
