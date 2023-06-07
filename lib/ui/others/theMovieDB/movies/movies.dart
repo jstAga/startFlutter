@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/resources/Constants.dart';
+import 'package:start_flutter/ui/others/theMovieDB/core/constants.dart';
 
 class MovieModel {
   final int id;
@@ -17,7 +17,7 @@ class MovieModel {
 }
 
 class Movies extends StatefulWidget {
-  Movies({Key? key}) : super(key: key);
+  const Movies({Key? key}) : super(key: key);
 
   @override
   State<Movies> createState() => _MoviesState();
@@ -95,11 +95,13 @@ class _MoviesState extends State<Movies> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(movie.title,
-                                      maxLines: 1,
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black)),
+                                  Text(
+                                    movie.title,
+                                    maxLines: 1,
+                                    // style: const TextStyle(
+                                    //     fontWeight: FontWeight.bold,
+                                    //     color: Colors.black)
+                                  ),
                                   const SizedBox(height: 5),
                                   Text(
                                     movie.time,

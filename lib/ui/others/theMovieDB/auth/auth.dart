@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/resources/Constants.dart';
+import 'package:start_flutter/ui/others/theMovieDB/core/constants.dart';
 
 class Auth extends StatefulWidget {
   const Auth({Key? key}) : super(key: key);
@@ -35,15 +35,15 @@ class _MainContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const TextStyle _textStyle = TextStyle(fontSize: 16, color: Colors.black);
+    const TextStyle textStyle = TextStyle(fontSize: 16, color: Colors.black);
 
     return Column(
       children: [
-        const Text(Constants.theMovieDbHeader1, style: _textStyle),
+        const Text(Constants.theMovieDbHeader1, style: textStyle),
         const SizedBox(
           height: 16,
         ),
-        const Text(Constants.theMovieDbHeader2, style: _textStyle),
+        const Text(Constants.theMovieDbHeader2, style: textStyle),
         const SizedBox(
           height: 20,
         ),
@@ -93,8 +93,8 @@ class _LoginFormState extends State<_LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    const TextStyle _textStyle = TextStyle(fontSize: 16, color: Colors.black);
-    const InputDecoration _inputDecoration = InputDecoration(
+    const TextStyle textStyle = TextStyle(fontSize: 16, color: Colors.black);
+    const InputDecoration inputDecoration = InputDecoration(
         border: OutlineInputBorder(),
         isCollapsed: true,
         contentPadding: EdgeInsets.all(8));
@@ -103,10 +103,10 @@ class _LoginFormState extends State<_LoginForm> {
       children: [
         const Text(
           Constants.theMovieDbUsername,
-          style: _textStyle,
+          style: textStyle,
         ),
         TextField(
-          decoration: _inputDecoration,
+          decoration: inputDecoration,
           controller: _usernameTextController,
         ),
         const SizedBox(
@@ -114,10 +114,10 @@ class _LoginFormState extends State<_LoginForm> {
         ),
         const Text(
           Constants.theMovieDbPassword,
-          style: _textStyle,
+          style: textStyle,
         ),
         TextField(
-          decoration: _inputDecoration,
+          decoration: inputDecoration,
           obscureText: true,
           controller: _passwordTextController,
         ),

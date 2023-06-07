@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/resources/Constants.dart';
+import 'package:start_flutter/ui/others/theMovieDB/core/constants.dart';
 import 'package:start_flutter/ui/others/theMovieDB/movies/movies.dart';
 
 class MovieHome extends StatefulWidget {
@@ -37,7 +37,7 @@ class _MovieHomeState extends State<MovieHome> {
       ),
       body: IndexedStack(
         index: _selectedTab,
-        children: [Movies(), const Text("Home"), const Text("Tv shows")],
+        children: const [Movies(), Text("Home"), Text("Tv shows")],
       ),
     );
   }
