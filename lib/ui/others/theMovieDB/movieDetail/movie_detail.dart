@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/resources/Constants.dart';
+import 'package:start_flutter/ui/others/theMovieDB/core/constants.dart';
 import 'package:start_flutter/ui/others/theMovieDB/movieDetail/movie_detail_main_info.dart';
 import 'package:start_flutter/ui/others/theMovieDB/movieDetail/movie_detail_screen_cast.dart';
 import 'package:start_flutter/ui/others/theMovieDB/movies/movies.dart';

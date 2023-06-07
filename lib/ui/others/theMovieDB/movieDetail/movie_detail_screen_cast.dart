@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:start_flutter/resources/resources.dart';
+import 'package:start_flutter/ui/others/theMovieDB/core/bases_ext.dart';
 
 class MovieDetailScreenCast extends StatelessWidget {
   const MovieDetailScreenCast({Key? key}) : super(key: key);
@@ -15,11 +16,8 @@ class MovieDetailScreenCast extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             child: TextButton(
               onPressed: () {},
-              child: const Text("Series Cast",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black)),
+              child: Text("Series Cast",
+                  style: BaseTextStyle.baseTitleText(Colors.black)),
             ),
           ),
           SizedBox(
@@ -74,11 +72,8 @@ class MovieDetailScreenCast extends StatelessWidget {
           ),
           TextButton(
               onPressed: () {},
-              child: const Text("Full Cast & Crew",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black)))
+              child: Text("Full Cast & Crew",
+                  style: BaseTextStyle.baseTitleText(Colors.black)))
         ],
       ),
     );
