@@ -1,5 +1,7 @@
-import 'package:start_flutter/ui/others/workWithJson/model/address/addreses.dart';
-import 'package:start_flutter/ui/others/workWithJson/model/human/human.dart';
+
+
+import 'package:start_flutter/ui/others/workWithJson/data/entity/address/addreses.dart';
+import 'package:start_flutter/ui/others/workWithJson/data/entity/human/human.dart';
 
 final humans = [
   Human(name: "alex", surname: "brown", age: 19, address: [

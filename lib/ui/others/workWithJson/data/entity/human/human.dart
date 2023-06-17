@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:start_flutter/ui/others/workWithJson/model/address/addreses.dart';
+import 'package:start_flutter/ui/others/workWithJson/data/entity/address/addreses.dart';
 
 part 'human.g.dart';
 
