@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:start_flutter/resources/resources.dart';
-
-const Color pink = Color.fromRGBO(240, 184, 210, 1.000);
+import 'package:start_flutter/ui/geekTech/5month/love_calculator/core/love_constants.dart';
+import 'package:start_flutter/ui/geekTech/5month/love_calculator/entity/love_request_data.dart';
 
 class LoveHomeWidget extends StatefulWidget {
   const LoveHomeWidget({super.key});
@@ -13,21 +13,24 @@ class LoveHomeWidget extends StatefulWidget {
 class _LoveHomeWidgetState extends State<LoveHomeWidget> {
   @override
   Widget build(BuildContext context) {
-    const textStyle = TextStyle(
-        color: Colors.black, fontSize: 18, fontWeight: FontWeight.w400);
-    return const Scaffold(
+    final firstNameController = TextEditingController();
+    final secondNameController = TextEditingController();
+    return Scaffold(
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image(image: AssetImage(Images.hw2m5_home_bg)),
-            _TitleWidget(),
-            _FirstNameWidget(textStyle: textStyle),
-            _FirstNameFieldWidget(),
-            _SecondNameWidget(textStyle: textStyle),
-            _SecondNameFieldWidget(),
-            SizedBox(height: 8),
-            _CalculateButton()
+            const Image(image: AssetImage(Images.hw2m5_home_bg)),
+            const _TitleWidget(),
+            const _FirstNameWidget(),
+            _FirstNameFieldWidget(controller: firstNameController),
+            const _SecondNameWidget(),
+            _SecondNameFieldWidget(controller: secondNameController),
+            const SizedBox(height: 8),
+            // const _CalculateButton()
+            _CalculateButton(
+                firstNameController: firstNameController,
+                secondNameController: secondNameController),
           ],
         ),
       ),
@@ -36,13 +39,16 @@ class _LoveHomeWidgetState extends State<LoveHomeWidget> {
 }
 
 class _SecondNameFieldWidget extends StatelessWidget {
-  const _SecondNameFieldWidget();
+  const _SecondNameFieldWidget({required this.controller});
+
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
             hintText: "Second name",
             border:
@@ -53,13 +59,16 @@ class _SecondNameFieldWidget extends StatelessWidget {
 }
 
 class _FirstNameFieldWidget extends StatelessWidget {
-  const _FirstNameFieldWidget();
+  final TextEditingController controller;
+
+  const _FirstNameFieldWidget({required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
             hintText: "First name",
             border:
@@ -76,60 +85,57 @@ class _TitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 12),
-      child: Text("Love calculator",
-          style: TextStyle(
-              color: pink, fontSize: 28, fontWeight: FontWeight.bold)),
+      child: Text("Love calculator", style: LoveConstants.baseTitleText),
     );
   }
 }
 
 class _SecondNameWidget extends StatelessWidget {
-  const _SecondNameWidget({
-    required this.textStyle,
-  });
-
-  final TextStyle textStyle;
+  const _SecondNameWidget();
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      child: Text("Second name", style: textStyle),
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      child: Text("Second name", style: LoveConstants.baseHomeText),
     );
   }
 }
 
 class _FirstNameWidget extends StatelessWidget {
-  const _FirstNameWidget({
-    required this.textStyle,
-  });
-
-  final TextStyle textStyle;
+  const _FirstNameWidget();
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      child: Text("First name", style: textStyle),
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      child: Text("First name", style: LoveConstants.baseHomeText),
     );
   }
 }
 
 class _CalculateButton extends StatelessWidget {
-  const _CalculateButton();
+  const _CalculateButton({
+    required this.firstNameController,
+    required this.secondNameController,
+  });
+
+  final TextEditingController firstNameController;
+  final TextEditingController secondNameController;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: ElevatedButton(
-          onPressed: () {},
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20))),
-            backgroundColor: MaterialStateProperty.all(pink),
-            padding: MaterialStateProperty.all(
-                const EdgeInsets.symmetric(horizontal: 40)),
-          ),
+          onPressed: () {
+            print("1 ${firstNameController.text}");
+            print("2 ${secondNameController.text}");
+            Navigator.pushNamed(context, "/loveCalculator/result",
+                arguments: LoveRequestData(
+                    firstName: firstNameController.text,
+                    secondName: secondNameController.text));
+          },
+          style: LoveConstants.baseLoveButton,
           child: const Text(
             "Calculate",
             style: TextStyle(color: Colors.black, fontSize: 16),
