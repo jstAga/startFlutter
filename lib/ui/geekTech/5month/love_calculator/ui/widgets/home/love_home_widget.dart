@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:start_flutter/resources/resources.dart';
-import 'package:start_flutter/ui/geekTech/5month/love_calculator/core/love_constants.dart';
-import 'package:start_flutter/ui/geekTech/5month/love_calculator/entity/love_request_data.dart';
+import 'package:start_flutter/ui/geekTech/5month/love_calculator/ui/core/love_constants.dart';
+import 'package:start_flutter/ui/geekTech/5month/love_calculator/ui/widgets/home/love_home_model.dart';
 
 class LoveHomeWidget extends StatefulWidget {
   const LoveHomeWidget({super.key});
@@ -11,27 +11,32 @@ class LoveHomeWidget extends StatefulWidget {
 }
 
 class _LoveHomeWidgetState extends State<LoveHomeWidget> {
+  final model = LoveHomeModel();
+
   @override
   Widget build(BuildContext context) {
     final firstNameController = TextEditingController();
     final secondNameController = TextEditingController();
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Image(image: AssetImage(Images.hw2m5_home_bg)),
-            const _TitleWidget(),
-            const _FirstNameWidget(),
-            _FirstNameFieldWidget(controller: firstNameController),
-            const _SecondNameWidget(),
-            _SecondNameFieldWidget(controller: secondNameController),
-            const SizedBox(height: 8),
-            // const _CalculateButton()
-            _CalculateButton(
-                firstNameController: firstNameController,
-                secondNameController: secondNameController),
-          ],
+        child: LoveHomeProvider(
+          model: model,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Image(image: AssetImage(Images.hw2m5_home_bg)),
+              const _TitleWidget(),
+              const _FirstNameWidget(),
+              _FirstNameFieldWidget(controller: firstNameController),
+              const _SecondNameWidget(),
+              _SecondNameFieldWidget(controller: secondNameController),
+              const SizedBox(height: 8),
+              // const _CalculateButton()
+              _CalculateButton(
+                  firstNameController: firstNameController,
+                  secondNameController: secondNameController),
+            ],
+          ),
         ),
       ),
     );
@@ -127,13 +132,13 @@ class _CalculateButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: ElevatedButton(
-          onPressed: () {
-            print("1 ${firstNameController.text}");
-            print("2 ${secondNameController.text}");
-            Navigator.pushNamed(context, "/loveCalculator/result",
-                arguments: LoveRequestData(
-                    firstName: firstNameController.text,
-                    secondName: secondNameController.text));
+          onPressed: () async {
+            await LoveHomeProvider.read(context)?.model.getLove(
+                firstName: firstNameController.text,
+                secondName: secondNameController.text);
+
+            await Navigator.pushNamed(context, "/loveCalculator/result",
+                arguments: LoveHomeProvider.read(context)!.model.result);
           },
           style: LoveConstants.baseLoveButton,
           child: const Text(
