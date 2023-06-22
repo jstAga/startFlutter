@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:start_flutter/resources/resources.dart';
-import 'package:start_flutter/ui/geekTech/5month/love_calculator/core/love_constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:start_flutter/ui/geekTech/5month/love_calculator/data/remote/entity/love_response.dart';
+import 'package:start_flutter/ui/geekTech/5month/love_calculator/ui/core/love_constants.dart';
 
 class LoveResultWidget extends StatefulWidget {
-  const LoveResultWidget(
-      {super.key, required this.firstName, required this.secondName});
+  final LoveResponse result;
 
-  final String firstName;
-  final String secondName;
-  final int percent = 83;
+  const LoveResultWidget({super.key, required this.result});
 
   @override
   State<LoveResultWidget> createState() => _LoveResultWidgetState();
@@ -26,7 +24,7 @@ class _LoveResultWidgetState extends State<LoveResultWidget> {
             const Image(image: AssetImage(Images.love_calculator_bg_result)),
             const _TitleWidget(),
             const SizedBox(height: 12),
-            Text(widget.firstName, style: LoveConstants.baseResultText),
+            Text(widget.result.fname, style: LoveConstants.baseResultText),
             const SizedBox(height: 12),
             const Icon(
               Icons.heart_broken_sharp,
@@ -34,9 +32,9 @@ class _LoveResultWidgetState extends State<LoveResultWidget> {
               size: 40,
             ),
             const SizedBox(height: 12),
-            Text(widget.secondName, style: LoveConstants.baseResultText),
+            Text(widget.result.sname, style: LoveConstants.baseResultText),
             const SizedBox(height: 12),
-            _Percent(percent: widget.percent),
+            _Percent(percent: widget.result.percentage),
             const SizedBox(height: 12),
             const _TryAgainButton()
           ],
@@ -75,7 +73,7 @@ class _TitleWidget extends StatelessWidget {
 }
 
 class _Percent extends StatelessWidget {
-  final int percent;
+  final String percent;
 
   const _Percent({required this.percent});
 

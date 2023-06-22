@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:start_flutter/ui/geekTech/2month/hw6m2.dart';
 import 'package:start_flutter/ui/geekTech/2month/hw7m2/hw7m2.dart';
-import 'package:start_flutter/ui/geekTech/5month/love_calculator/entity/love_request_data.dart';
-import 'package:start_flutter/ui/geekTech/5month/love_calculator/ui/home/love_home_widget.dart';
-import 'package:start_flutter/ui/geekTech/5month/love_calculator/ui/result/love_result_widget.dart';
+import 'package:start_flutter/ui/geekTech/5month/love_calculator/data/remote/entity/love_response.dart';
+import 'package:start_flutter/ui/geekTech/5month/love_calculator/ui/model/love_request_data.dart';
+import 'package:start_flutter/ui/geekTech/5month/love_calculator/ui/widgets/home/love_home_widget.dart';
+import 'package:start_flutter/ui/geekTech/5month/love_calculator/ui/widgets/result/love_result_widget.dart';
 import 'package:start_flutter/ui/others/theMovieDB/core/constants.dart';
 import 'package:start_flutter/ui/others/telegramSettings/telegram_settings.dart';
 import 'package:start_flutter/ui/others/theMovieDB/auth/auth.dart';
@@ -47,18 +48,8 @@ class App extends StatelessWidget {
         "/loveCalculator": (context) => const LoveHomeWidget(),
         "/loveCalculator/result": (context) {
           final argument =
-              ModalRoute.of(context)?.settings.arguments as LoveRequestData;
-          if (argument.firstName.isNotEmpty && argument.secondName.isNotEmpty) {
-            return LoveResultWidget(
-              firstName: argument.firstName,
-              secondName: argument.secondName,
-            );
-          } else {
-            return const LoveResultWidget(
-              firstName: "empty",
-              secondName: "empty",
-            );
-          }
+              ModalRoute.of(context)?.settings.arguments as LoveResponse;
+          return LoveResultWidget(result: argument);
         },
       },
       theme: ThemeData(
