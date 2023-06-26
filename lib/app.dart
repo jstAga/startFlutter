@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:start_flutter/ui/geekTech/2month/hw6m2.dart';
 import 'package:start_flutter/ui/geekTech/2month/hw7m2/hw7m2.dart';
 import 'package:start_flutter/ui/geekTech/5month/love_calculator/data/remote/entity/love_response.dart';
-import 'package:start_flutter/ui/geekTech/5month/love_calculator/ui/model/love_request_data.dart';
 import 'package:start_flutter/ui/geekTech/5month/love_calculator/ui/widgets/home/love_home_widget.dart';
 import 'package:start_flutter/ui/geekTech/5month/love_calculator/ui/widgets/result/love_result_widget.dart';
 import 'package:start_flutter/ui/others/theMovieDB/core/constants.dart';
@@ -11,7 +10,7 @@ import 'package:start_flutter/ui/others/telegramSettings/telegram_settings.dart'
 import 'package:start_flutter/ui/others/theMovieDB/auth/auth.dart';
 import 'package:start_flutter/ui/others/theMovieDB/movieDetail/movie_detail.dart';
 import 'package:start_flutter/ui/others/theMovieDB/movieHome/movie_home.dart';
-import 'package:start_flutter/ui/others/workWithHttp/ui/work_with_http_widget.dart';
+import 'package:start_flutter/ui/others/work_with_hive/ui/work_with_hive_widget.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -32,7 +31,7 @@ class App extends StatelessWidget {
       initialRoute: "/",
       routes: {
         // "/": (context) => home,
-        "/": (context) => const LoveHomeWidget(),
+        "/": (context) => const WorkWithHiveWidget(),
         "/hw6m2": (context) => hw6m2,
         "/hw7m2": (context) => hw7m2,
         "/telegramSettings": (context) => telegramSettings,
