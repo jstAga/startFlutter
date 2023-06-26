@@ -10,7 +10,8 @@ import 'package:start_flutter/ui/others/telegram_settings/telegram_settings.dart
 import 'package:start_flutter/ui/others/the_movie_db/auth/auth.dart';
 import 'package:start_flutter/ui/others/the_movie_db/movieDetail/movie_detail.dart';
 import 'package:start_flutter/ui/others/the_movie_db/movieHome/movie_home.dart';
-import 'package:start_flutter/ui/others/work_with_hive/ui/work_with_hive_widget.dart';
+import 'package:start_flutter/ui/others/todo_list/ui/group_form/group_form_widget.dart';
+import 'package:start_flutter/ui/others/todo_list/ui/groups/groups_widget.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -31,7 +32,7 @@ class App extends StatelessWidget {
       initialRoute: "/",
       routes: {
         // "/": (context) => home,
-        "/": (context) => const WorkWithHiveWidget(),
+        "/": (context) => const GroupsWidget(),
         "/hw6m2": (context) => hw6m2,
         "/hw7m2": (context) => hw7m2,
         "/telegramSettings": (context) => telegramSettings,
@@ -50,6 +51,8 @@ class App extends StatelessWidget {
               ModalRoute.of(context)?.settings.arguments as LoveResponse;
           return LoveResultWidget(result: argument);
         },
+        "/todoList" : (context) => GroupsWidget(),
+        "/todoList/groupForm" : (context) => GroupFormWidget(),
       },
       theme: ThemeData(
           appBarTheme: const AppBarTheme(
