@@ -1,7 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:start_flutter/ui/others/todo_list/ui/group_form/group_form_model.dart';
 
-class GroupFormWidget extends StatelessWidget {
+class GroupFormWidget extends StatefulWidget {
   const GroupFormWidget({super.key});
+
+  @override
+  State<GroupFormWidget> createState() => _GroupFormWidgetState();
+}
+
+class _GroupFormWidgetState extends State<GroupFormWidget> {
+  final _model = GroupFormModel();
+
+  @override
+  Widget build(BuildContext context) {
+    return GroupFormModelProvider(
+      model: _model,
+      child: const _GroupFormScaffold(),
+    );
+  }
+}
+
+class _GroupFormScaffold extends StatelessWidget {
+  const _GroupFormScaffold();
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +43,16 @@ class _GroupNameWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const TextField(
+    final model = GroupFormModelProvider.read(context)?.model;
+    return TextField(
       maxLines: 1,
       autofocus: true,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         border: OutlineInputBorder(),
         helperText: "Name of group",
       ),
+      onEditingComplete: () => model?.saveGroup(context),
+      onChanged: (value) => model?.groupName = value,
     );
   }
 }
@@ -39,8 +62,9 @@ class _FabWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = GroupFormModelProvider.read(context)?.model;
     return FloatingActionButton(
-      onPressed: () {},
+      onPressed: () => model?.saveGroup(context),
       child: const Icon(Icons.done),
     );
   }

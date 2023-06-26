@@ -1,8 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:start_flutter/ui/others/todo_list/ui/groups/groups_model.dart';
 
-class GroupsWidget extends StatelessWidget {
+class GroupsWidget extends StatefulWidget {
   const GroupsWidget({super.key});
+
+  @override
+  State<GroupsWidget> createState() => _GroupsWidgetState();
+}
+
+class _GroupsWidgetState extends State<GroupsWidget> {
+  final _model = GroupsModel();
+
+  @override
+  Widget build(BuildContext context) {
+    return GroupsModelProvider(model: _model, child: const _ScaffoldWidget());
+  }
+}
+
+class _ScaffoldWidget extends StatelessWidget {
+  const _ScaffoldWidget();
 
   @override
   Widget build(BuildContext context) {
