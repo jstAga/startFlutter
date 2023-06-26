@@ -1,8 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:start_flutter/resources/ext.dart';
-import 'package:start_flutter/resources/resources.dart';
-import 'package:start_flutter/ui/others/theMovieDB/movies/movies.dart';
 
 class Constants {
   //hw7m2
