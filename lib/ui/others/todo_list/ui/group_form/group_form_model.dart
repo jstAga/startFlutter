@@ -11,7 +11,6 @@ class GroupFormModel {
     final group = Group(groupName: groupName);
     await box.add(group);
     await box.compact();
-    await box.close();
     Navigator.pop(context);
   }
 }
@@ -37,7 +36,7 @@ class GroupFormModelProvider extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(GroupFormModelProvider old) {
+  bool updateShouldNotify(GroupFormModelProvider oldWidget) {
     return true;
   }
 }

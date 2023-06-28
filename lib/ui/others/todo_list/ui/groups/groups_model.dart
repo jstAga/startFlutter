@@ -1,12 +1,37 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:start_flutter/ui/others/todo_list/data/entity/group.dart';
 
-class GroupsModel extends ChangeNotifier{
+class GroupsModel extends ChangeNotifier {
+
+  GroupsModel() {
+    _setup();
+  }
+
+  var _groups = <Group>[];
+
+  List<Group> get groups => _groups.toList();
 
 
+  void toForm(BuildContext context) {
+    Navigator.pushNamed(context, "/todoList/groupForm");
+  }
+
+  void _readGroups(Box<Group> box) {
+    _groups = box.values.toList();
+    notifyListeners();
+  }
+
+  void _setup() async {
+    final box = await Hive.openBox<Group>("groupsBox");
+    _readGroups(box);
+    box.listenable().addListener(() => _readGroups(box));
+  }
 }
 
 class GroupsModelProvider extends InheritedNotifier {
   final GroupsModel model;
+
   const GroupsModelProvider({
     super.key,
     required this.model,
