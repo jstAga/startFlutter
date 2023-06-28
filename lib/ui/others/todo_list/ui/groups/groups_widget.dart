@@ -35,7 +35,6 @@ class _ScaffoldWidget extends StatelessWidget {
 class _FabWidget extends StatelessWidget {
   const _FabWidget();
 
-
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
@@ -50,17 +49,16 @@ class _GroupListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  final groupsCount = GroupsModelProvider.watch(context)?.model.groups.length ?? 0;
+    final groupsCount =
+        GroupsModelProvider.watch(context)?.model.groups.length ?? 0;
     return ListView.separated(
-        itemCount: groupsCount,
-        itemBuilder: (BuildContext context, int index) {
-          return _GroupItemWidget(
-            index: index
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return const Divider(height: 10);
-        },
+      itemCount: groupsCount,
+      itemBuilder: (BuildContext context, int index) {
+        return _GroupItemWidget(index: index);
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return const Divider(height: 10);
+      },
     );
   }
 }
@@ -70,11 +68,9 @@ class _GroupItemWidget extends StatelessWidget {
 
   const _GroupItemWidget({required this.index});
 
-  void doNothing(BuildContext context) {}
-
   @override
   Widget build(BuildContext context) {
-    final data = GroupsModelProvider.read(context)!.model.groups[index];
+    final model = GroupsModelProvider.read(context)?.model;
     return Slidable(
       closeOnScroll: false,
       groupTag: "0",
@@ -86,7 +82,7 @@ class _GroupItemWidget extends StatelessWidget {
         dragDismissible: false,
         children: <Widget>[
           SlidableAction(
-            onPressed: doNothing,
+            onPressed: (BuildContext context) => model?.deleteGroup(index),
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
             icon: Icons.delete,
@@ -97,7 +93,7 @@ class _GroupItemWidget extends StatelessWidget {
       child: ColoredBox(
         color: Colors.white,
         child: ListTile(
-          title: Text(data.groupName),
+          title: Text(model!.groups[index].groupName),
           trailing: const Icon(Icons.chevron_right),
           onTap: () {},
         ),
