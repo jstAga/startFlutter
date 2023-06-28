@@ -35,39 +35,33 @@ class _ScaffoldWidget extends StatelessWidget {
 class _FabWidget extends StatelessWidget {
   const _FabWidget();
 
-  void toForm(BuildContext context) {
-    Navigator.pushNamed(context, "/todoList/groupForm");
-  }
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () => toForm(context),
+      onPressed: () => GroupsModelProvider.read(context)?.model.toForm(context),
       child: const Icon(Icons.add),
     );
   }
 }
 
-class _GroupListWidget extends StatefulWidget {
+class _GroupListWidget extends StatelessWidget {
   const _GroupListWidget();
 
   @override
-  State<_GroupListWidget> createState() => _GroupListWidgetState();
-}
-
-class _GroupListWidgetState extends State<_GroupListWidget> {
-  @override
   Widget build(BuildContext context) {
+  final groupsCount = GroupsModelProvider.watch(context)?.model.groups.length ?? 0;
     return ListView.separated(
+        itemCount: groupsCount,
         itemBuilder: (BuildContext context, int index) {
           return _GroupItemWidget(
-            index: index,
+            index: index
           );
         },
         separatorBuilder: (BuildContext context, int index) {
           return const Divider(height: 10);
         },
-        itemCount: 100);
+    );
   }
 }
 
@@ -80,6 +74,7 @@ class _GroupItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final data = GroupsModelProvider.read(context)!.model.groups[index];
     return Slidable(
       closeOnScroll: false,
       groupTag: "0",
@@ -102,7 +97,7 @@ class _GroupItemWidget extends StatelessWidget {
       child: ColoredBox(
         color: Colors.white,
         child: ListTile(
-          title: Text("$index"),
+          title: Text(data.groupName),
           trailing: const Icon(Icons.chevron_right),
           onTap: () {},
         ),
