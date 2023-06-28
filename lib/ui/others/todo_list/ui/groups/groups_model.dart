@@ -3,7 +3,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:start_flutter/ui/others/todo_list/data/entity/group.dart';
 
 class GroupsModel extends ChangeNotifier {
-
   GroupsModel() {
     _setup();
   }
@@ -12,9 +11,13 @@ class GroupsModel extends ChangeNotifier {
 
   List<Group> get groups => _groups.toList();
 
-
   void toForm(BuildContext context) {
     Navigator.pushNamed(context, "/todoList/groupForm");
+  }
+
+  void deleteGroup(int index) async {
+    final box = await Hive.openBox<Group>("groupsBox");
+    await box.deleteAt(index);
   }
 
   void _readGroups(Box<Group> box) {
