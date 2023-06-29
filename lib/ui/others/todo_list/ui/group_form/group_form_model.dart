@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:start_flutter/ui/others/todo_list/data/entity/group.dart';
+import 'package:start_flutter/ui/others/todo_list/data/entity/group/group.dart';
 
 class GroupFormModel {
   var groupName = "";
