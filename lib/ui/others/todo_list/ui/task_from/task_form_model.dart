@@ -6,17 +6,17 @@ import 'package:start_flutter/ui/others/todo_list/data/entity/task/task.dart';
 class TaskFormModel {
   TaskFormModel({required this.groupKey});
 
-  var text = "";
+  var taskText = "";
   final int groupKey;
 
   void saveTask(BuildContext context) async {
-    if (text.isEmpty) return;
+    if (taskText.isEmpty) return;
 
     final groupBox = await Hive.openBox<Group>("groupBox");
     final group = groupBox.get(groupKey);
 
     final tasksBox = await Hive.openBox<Task>("tasksBox");
-    final task = Task(text: text, isDone: false);
+    final task = Task(text: taskText, isDone: false);
     await tasksBox.add(task);
 
     group?.addTask(tasksBox, task);
@@ -33,7 +33,7 @@ class TaskFormModelProvider extends InheritedWidget {
     required Widget child,
   }) : super(child: child);
 
-  final TaskFormModelProvider model;
+  final TaskFormModel model;
 
   static TaskFormModelProvider? watch(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<TaskFormModelProvider>();
@@ -48,6 +48,6 @@ class TaskFormModelProvider extends InheritedWidget {
 
   @override
   bool updateShouldNotify(TaskFormModelProvider oldWidget) {
-    return true;
+    return false;
   }
 }

@@ -49,7 +49,7 @@ class _GroupNameWidget extends StatelessWidget {
       autofocus: true,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
-        helperText: "Name of group",
+        helperText: "Name of the group",
       ),
       onEditingComplete: () => model?.saveGroup(context),
       onChanged: (value) => model?.groupName = value,
