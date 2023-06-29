@@ -14,7 +14,7 @@ class TasksModel extends ChangeNotifier {
   }
 
   void toForm(BuildContext context) {
-    Navigator.pushNamed(context, "/todoList/tasks/taskForm");
+    Navigator.pushNamed(context, "/todoList/tasks/taskForm", arguments: groupKey);
   }
 
   void _setup() {
