@@ -1,32 +1,35 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'group.dart';
+part of 'task.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class GroupAdapter extends TypeAdapter<Group> {
+class TaskAdapter extends TypeAdapter<Task> {
   @override
-  final int typeId = 2;
+  final int typeId = 3;
 
   @override
-  Group read(BinaryReader reader) {
+  Task read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Group(
-      groupName: fields[0] as String,
+    return Task(
+      text: fields[0] as String,
+      isDone: fields[1] as bool,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Group obj) {
+  void write(BinaryWriter writer, Task obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.groupName);
+      ..write(obj.text)
+      ..writeByte(1)
+      ..write(obj.isDone);
   }
 
   @override
@@ -35,7 +38,7 @@ class GroupAdapter extends TypeAdapter<Group> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is GroupAdapter &&
+      other is TaskAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

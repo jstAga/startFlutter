@@ -27,19 +27,10 @@ class _ScaffoldWidget extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(title: const Text("Groups")),
       body: const _GroupListWidget(),
-      floatingActionButton: const _FabWidget(),
-    );
-  }
-}
-
-class _FabWidget extends StatelessWidget {
-  const _FabWidget();
-
-  @override
-  Widget build(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () => GroupsModelProvider.read(context)?.model.toForm(context),
-      child: const Icon(Icons.add),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => GroupsModelProvider.read(context)?.model.toForm(context),
+        child: const Icon(Icons.add),
+      )
     );
   }
 }
@@ -95,7 +86,7 @@ class _GroupItemWidget extends StatelessWidget {
         child: ListTile(
           title: Text(model!.groups[index].groupName),
           trailing: const Icon(Icons.chevron_right),
-          onTap: () {},
+          onTap: () => model.toTasks(context, index),
         ),
       ),
     );

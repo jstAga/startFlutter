@@ -12,6 +12,8 @@ import 'package:start_flutter/ui/others/the_movie_db/movieDetail/movie_detail.da
 import 'package:start_flutter/ui/others/the_movie_db/movieHome/movie_home.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/group_form/group_form_widget.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/groups/groups_widget.dart';
+import 'package:start_flutter/ui/others/todo_list/ui/task_from/task_form_widget.dart';
+import 'package:start_flutter/ui/others/todo_list/ui/tasks/tasks_widget.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -53,6 +55,8 @@ class App extends StatelessWidget {
         },
         "/todoList" : (context) => GroupsWidget(),
         "/todoList/groupForm" : (context) => GroupFormWidget(),
+        "/todoList/tasks" : (context) => TasksWidget(),
+        "/todoList/tasks/taskForm" : (context) => TaskFormWidget(),
       },
       theme: ThemeData(
           appBarTheme: const AppBarTheme(
