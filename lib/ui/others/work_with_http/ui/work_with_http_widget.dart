@@ -28,7 +28,7 @@ class _WorkWithHttpWidgetState extends State<WorkWithHttpWidget> {
 }
 
 class _ReloadButton extends StatelessWidget {
-  const _ReloadButton({super.key});
+  const _ReloadButton();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class _ReloadButton extends StatelessWidget {
 }
 
 class _CreateButton extends StatelessWidget {
-  const _CreateButton({super.key});
+  const _CreateButton();
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class _CreateButton extends StatelessWidget {
 }
 
 class _PostsWidget extends StatelessWidget {
-  const _PostsWidget({super.key});
+  const _PostsWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,7 @@ class _PostsWidget extends StatelessWidget {
 class _PostItemWidget extends StatelessWidget {
   final int index;
 
-  const _PostItemWidget({super.key, required this.index});
+  const _PostItemWidget({required this.index});
 
   @override
   Widget build(BuildContext context) {

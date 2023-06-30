@@ -24,7 +24,7 @@ class _LoveHomeWidgetState extends State<LoveHomeWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Image(image: AssetImage(Images.hw2m5_home_bg)),
+              const Image(image: AssetImage(Images.hw2m5HomeBg)),
               const _TitleWidget(),
               const _FirstNameWidget(),
               _FirstNameFieldWidget(controller: firstNameController),

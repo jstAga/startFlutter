@@ -84,8 +84,6 @@ class _LoginFormState extends State<_LoginForm> {
     if (_usernameTextController.text == "admin" &&
         _passwordTextController.text == "admin") {
       Navigator.of(context).pushNamed("/homeTheMovieDB");
-    } else {
-      print("error");
     }
   }
 

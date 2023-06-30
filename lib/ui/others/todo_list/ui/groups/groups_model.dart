@@ -24,9 +24,10 @@ class GroupsModel extends ChangeNotifier {
         Navigator.pushNamed(context, "/todoList/tasks", arguments: groupKey));
   }
 
-  void deleteGroup(int index) async {
+  void _setup() async {
     final box = await Hive.openBox<Group>("groupsBox");
-    await box.deleteAt(index);
+    _readGroups(box);
+    box.listenable().addListener(() => _readGroups(box));
   }
 
   void _readGroups(Box<Group> box) {
@@ -34,10 +35,9 @@ class GroupsModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _setup() async {
+  void deleteGroup(int index) async {
     final box = await Hive.openBox<Group>("groupsBox");
-    _readGroups(box);
-    box.listenable().addListener(() => _readGroups(box));
+    await box.deleteAt(index);
   }
 }
 

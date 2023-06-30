@@ -56,7 +56,7 @@ class _TasksListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const groupsCount = 100;
+    final groupsCount = TasksModelProvider.watch(context)?.model.tasks.length ?? 0;
     return ListView.separated(
       itemCount: groupsCount,
       itemBuilder: (BuildContext context, int index) {
@@ -76,10 +76,10 @@ class _TaskItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final model = _TaskItemWidget.read(context)?.model;
+    final model = TasksModelProvider.read(context)?.model;
     return Slidable(
       closeOnScroll: false,
-      groupTag: "0",
+      groupTag: "1",
       endActionPane: ActionPane(
         motion: const ScrollMotion(),
         dismissible: DismissiblePane(
@@ -88,7 +88,7 @@ class _TaskItemWidget extends StatelessWidget {
         dragDismissible: false,
         children: <Widget>[
           SlidableAction(
-            onPressed: (BuildContext context) {},
+            onPressed: (BuildContext context) => model?.deleteTask(index),
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
             icon: Icons.delete,
@@ -99,7 +99,7 @@ class _TaskItemWidget extends StatelessWidget {
       child: ColoredBox(
         color: Colors.white,
         child: ListTile(
-            title: const Text("d"),
+            title:  Text(model?.tasks[index].text ?? ""),
             trailing: const Icon(Icons.chevron_right),
             onTap: () {}),
       ),
