@@ -53,10 +53,10 @@ class App extends StatelessWidget {
               ModalRoute.of(context)?.settings.arguments as LoveResponse;
           return LoveResultWidget(result: argument);
         },
-        "/todoList" : (context) => GroupsWidget(),
-        "/todoList/groupForm" : (context) => GroupFormWidget(),
-        "/todoList/tasks" : (context) => TasksWidget(),
-        "/todoList/tasks/taskForm" : (context) => TaskFormWidget(),
+        "/todoList" : (context) => const GroupsWidget(),
+        "/todoList/groupForm" : (context) => const GroupFormWidget(),
+        "/todoList/tasks" : (context) => const TasksWidget(),
+        "/todoList/tasks/taskForm" : (context) => const TaskFormWidget(),
       },
       theme: ThemeData(
           appBarTheme: const AppBarTheme(

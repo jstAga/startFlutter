@@ -35,7 +35,7 @@ class _BankingHomeState extends State<BankingHome> {
 class _CreditCard extends StatefulWidget {
   final String count;
 
-  const _CreditCard({required this.count, super.key});
+  const _CreditCard({required this.count});
 
   @override
   State<_CreditCard> createState() => _CreditCardState();

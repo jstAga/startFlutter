@@ -41,11 +41,9 @@ class _TaskFormScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("New task")),
-      body: const SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Center(child: _TaskNameWidget()),
-        ),
+      body: const Padding(
+        padding: EdgeInsets.all(16),
+        child: Center(child: _TaskNameWidget()),
       ),
       floatingActionButton: const _FabWidget(),
     );
@@ -59,11 +57,13 @@ class _TaskNameWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = TaskFormModelProvider.read(context)?.model;
     return TextField(
-      maxLines: 1,
+      expands: true,
+      minLines: null,
+      maxLines: null,
       autofocus: true,
       decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        helperText: "Name of the task",
+        border: InputBorder.none,
+        hintText: "Text of the task",
       ),
       onEditingComplete: () => model?.saveTask(context),
       onChanged: (value) => model?.taskText = value,

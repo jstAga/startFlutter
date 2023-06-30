@@ -21,7 +21,7 @@ class _LoveResultWidgetState extends State<LoveResultWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Image(image: AssetImage(Images.love_calculator_bg_result)),
+            const Image(image: AssetImage(Images.loveCalculatorBgResult)),
             const _TitleWidget(),
             const SizedBox(height: 12),
             Text(widget.result.fname, style: LoveConstants.baseResultText),
@@ -80,7 +80,7 @@ class _Percent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(alignment: Alignment.center, children: [
-      SvgPicture.asset(Images.ic_heart_plus, width: 100, height: 100),
+      SvgPicture.asset(Images.icHeartPlus, width: 100, height: 100),
       Text("$percent%", style: LoveConstants.baseHomeText)
     ]);
   }

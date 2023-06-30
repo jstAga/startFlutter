@@ -22,6 +22,10 @@ class TaskFormModel {
     group?.addTask(tasksBox, task);
 
     await tasksBox.compact();
+
+    print(groupBox.get(0));
+    print(tasksBox.values);
+
     Navigator.pop(context);
   }
 }
