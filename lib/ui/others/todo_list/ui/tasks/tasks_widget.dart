@@ -3,34 +3,26 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/tasks/tasks_model.dart';
 
 class TasksWidget extends StatefulWidget {
-  const TasksWidget({super.key, required});
+  const TasksWidget({super.key, required, required this.groupKey});
+
+  final int groupKey;
 
   @override
   State<TasksWidget> createState() => _TasksWidgetState();
 }
 
 class _TasksWidgetState extends State<TasksWidget> {
-  TasksModel? _model;
+  late final TasksModel _model;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (_model == null) {
-      final groupKey = ModalRoute.of(context)!.settings.arguments as int;
-      _model = TasksModel(groupKey: groupKey);
-    }
+  void initState() {
+    super.initState();
+    _model = TasksModel(groupKey: widget.groupKey);
   }
 
   @override
   Widget build(BuildContext context) {
-    final model = _model;
-    if (model != null) {
-      return TasksModelProvider(model: model, child: const _ScaffoldWidget());
-    } else {
-      return const Center(
-        child: Text("error with tasks"),
-      );
-    }
+    return TasksModelProvider(model: _model, child: const _ScaffoldWidget());
   }
 }
 

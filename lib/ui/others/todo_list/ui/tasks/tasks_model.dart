@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:start_flutter/ui/main_navigation/main_navigation.dart';
 import 'package:start_flutter/ui/others/todo_list/data/entity/group/group.dart';
 import 'package:start_flutter/ui/others/todo_list/data/entity/task/task.dart';
 
@@ -20,7 +21,7 @@ class TasksModel extends ChangeNotifier {
   List<Task> get tasks => _tasks.toList();
 
   void toForm(BuildContext context) {
-    Navigator.pushNamed(context, "/todoList/tasks/taskForm",
+    Navigator.pushNamed(context, MainNavigationRoutesNames.taskForm,
         arguments: groupKey);
   }
 

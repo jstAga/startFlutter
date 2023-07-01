@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:start_flutter/ui/main_navigation/main_navigation.dart';
 import 'package:start_flutter/ui/others/the_movie_db/core/constants.dart';
 
 class MovieModel {
@@ -50,7 +51,7 @@ class _MoviesState extends State<Movies> {
   }
 
   void _onMovieTap(int index) {
-    Navigator.pushNamed(context, "/homeTheMovieDB/movieDetail",
+    Navigator.pushNamed(context, MainNavigationRoutesNames.movieDetail,
         arguments: _filteredMovies[index].id);
   }
 
