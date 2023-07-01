@@ -52,6 +52,14 @@ class TasksModel extends ChangeNotifier {
     await (_group?.tasks?.deleteFromHive(groupIndex));
     _group?.save();
   }
+
+  void doneTask(int groupIndex) async {
+    final task = _group?.tasks?[groupIndex];
+    final currentState = task?.isDone ?? false;
+    task?.isDone = !currentState;
+    await task?.save();
+    notifyListeners();
+  }
 }
 
 class TasksModelProvider extends InheritedNotifier {
