@@ -12,19 +12,14 @@ class TaskFormModel {
   void saveTask(BuildContext context) async {
     if (taskText.isEmpty) return;
 
-    final groupBox = await Hive.openBox<Group>("groupBox");
-    final group = groupBox.get(groupKey);
-
     final tasksBox = await Hive.openBox<Task>("tasksBox");
     final task = Task(text: taskText, isDone: false);
     await tasksBox.add(task);
 
+    final groupBox = await Hive.openBox<Group>("groupsBox");
+    final group = groupBox.get(groupKey);
+
     group?.addTask(tasksBox, task);
-
-    await tasksBox.compact();
-
-    print(groupBox.get(0));
-    print(tasksBox.values);
 
     Navigator.pop(context);
   }
