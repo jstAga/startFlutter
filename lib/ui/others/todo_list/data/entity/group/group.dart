@@ -4,7 +4,7 @@ import 'package:start_flutter/ui/others/todo_list/data/entity/task/task.dart';
 part 'group.g.dart';
 
 @HiveType(typeId: 2)
-class Group{
+class Group extends HiveObject{
 
   @HiveField(0)
   final String groupName;
@@ -17,5 +17,6 @@ class Group{
   void addTask(Box<Task> box, Task task){
     tasks ??= HiveList(box);
     tasks?.add(task);
+    save();
   }
 }

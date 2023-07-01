@@ -9,10 +9,11 @@ class TasksModel extends ChangeNotifier {
   }
 
   int groupKey;
+
+  late final Future<Box<Group>> _groupBox;
   Group? _group;
 
   Group? get group => _group;
-  late final Future<Box<Group>> _groupBox;
 
   var _tasks = <Task>[];
 
@@ -24,18 +25,19 @@ class TasksModel extends ChangeNotifier {
   }
 
   void _setup() {
+    Hive.openBox<Task>("tasksBox");
     _groupBox = Hive.openBox<Group>("groupsBox");
-    _loadTask();
+    _loadGroup();
     _setupListener();
   }
 
-  void _loadTask() async {
-    final box = await _groupBox;
-    _group = box.get(groupKey);
+  void _loadGroup() async {
+    final groupBox = await _groupBox;
+    _group = groupBox.get(groupKey);
     notifyListeners();
   }
 
-  void _readTasks() {
+  void _readTasks() async {
     _tasks = _group?.tasks ?? <Task>[];
     notifyListeners();
   }
@@ -46,8 +48,9 @@ class TasksModel extends ChangeNotifier {
     box.listenable(keys: <dynamic>[groupKey]).addListener(_readTasks);
   }
 
-  void deleteTask(int groupIndex) {
-    _group?.tasks?.deleteFromHive(groupIndex);
+  void deleteTask(int groupIndex) async {
+    await (_group?.tasks?.deleteFromHive(groupIndex));
+    _group?.save();
   }
 }
 

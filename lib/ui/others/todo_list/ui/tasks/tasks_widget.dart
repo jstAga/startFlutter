@@ -76,7 +76,7 @@ class _TaskItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = TasksModelProvider.read(context)?.model;
+    final model = TasksModelProvider.read(context)!.model;
     return Slidable(
       closeOnScroll: false,
       groupTag: "1",
@@ -88,7 +88,7 @@ class _TaskItemWidget extends StatelessWidget {
         dragDismissible: false,
         children: <Widget>[
           SlidableAction(
-            onPressed: (BuildContext context) => model?.deleteTask(index),
+            onPressed: (BuildContext context) => model.deleteTask(index),
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
             icon: Icons.delete,
@@ -99,7 +99,7 @@ class _TaskItemWidget extends StatelessWidget {
       child: ColoredBox(
         color: Colors.white,
         child: ListTile(
-            title:  Text(model?.tasks[index].text ?? ""),
+            title:  Text(model.tasks[index].text),
             trailing: const Icon(Icons.chevron_right),
             onTap: () {}),
       ),
