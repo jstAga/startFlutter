@@ -56,7 +56,8 @@ class _TasksListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final groupsCount = TasksModelProvider.watch(context)?.model.tasks.length ?? 0;
+    final groupsCount =
+        TasksModelProvider.watch(context)?.model.tasks.length ?? 0;
     return ListView.separated(
       itemCount: groupsCount,
       itemBuilder: (BuildContext context, int index) {
@@ -77,6 +78,12 @@ class _TaskItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = TasksModelProvider.read(context)!.model;
+    final task = model.tasks[index];
+    final IconData? icon = task.isDone ? Icons.done : null;
+    final textStyle = task.isDone
+        ? const TextStyle(decoration: TextDecoration.lineThrough)
+        : null;
+
     return Slidable(
       closeOnScroll: false,
       groupTag: "1",
@@ -99,9 +106,9 @@ class _TaskItemWidget extends StatelessWidget {
       child: ColoredBox(
         color: Colors.white,
         child: ListTile(
-            title:  Text(model.tasks[index].text),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: () {}),
+            title: Text(task.text, style: textStyle),
+            trailing: Icon(icon),
+            onTap: () => model.doneTask(index)),
       ),
     );
   }

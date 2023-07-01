@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:start_flutter/ui/others/todo_list/data/entity/group/group.dart';
+import 'package:start_flutter/ui/others/todo_list/data/entity/task/task.dart';
 
 class GroupsModel extends ChangeNotifier {
   GroupsModel() {
@@ -26,6 +27,7 @@ class GroupsModel extends ChangeNotifier {
 
   void _setup() async {
     final box = await Hive.openBox<Group>("groupsBox");
+    await Hive.openBox<Task>("tasksBox");
     _readGroups(box);
     box.listenable().addListener(() => _readGroups(box));
   }
@@ -37,6 +39,7 @@ class GroupsModel extends ChangeNotifier {
 
   void deleteGroup(int index) async {
     final box = await Hive.openBox<Group>("groupsBox");
+    await box.getAt(index)?.tasks?.deleteAllFromHive();
     await box.deleteAt(index);
   }
 }
