@@ -3,6 +3,7 @@ import 'package:start_flutter/resources/resources.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/data/remote/entity/love_response.dart';
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/ui/core/love_constants.dart';
+import 'package:start_flutter/ui/main_navigation/main_navigation.dart';
 
 class LoveResultWidget extends StatefulWidget {
   final LoveResponse result;
@@ -50,7 +51,8 @@ class _TryAgainButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () => Navigator.pushNamed(context, "/loveCalculator"),
+        onPressed: () => Navigator.pushNamed(
+            context, MainNavigationRoutesNames.loveCalculator),
         style: LoveConstants.baseLoveButton,
         child: const Text(
           "Try again",

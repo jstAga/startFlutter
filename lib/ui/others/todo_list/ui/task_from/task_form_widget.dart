@@ -2,35 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/task_from/task_form_model.dart';
 
 class TaskFormWidget extends StatefulWidget {
-  const TaskFormWidget({super.key});
+  const TaskFormWidget({super.key, required this.groupKey});
+
+  final int groupKey;
 
   @override
   State<TaskFormWidget> createState() => _TaskFormWidget();
 }
 
 class _TaskFormWidget extends State<TaskFormWidget> {
-  TaskFormModel? _model;
+  late final TaskFormModel _model;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (_model == null) {
-      final groupKey = ModalRoute.of(context)!.settings.arguments as int;
-      _model = TaskFormModel(groupKey: groupKey);
-    }
+  void initState() {
+    super.initState();
+    _model = TaskFormModel(groupKey: widget.groupKey);
   }
 
   @override
   Widget build(BuildContext context) {
-    final model = _model;
-    if (model != null) {
-      return TaskFormModelProvider(
-          model: model, child: const _TaskFormScaffold());
-    } else {
-      return const Center(
-        child: Text("error with tasks"),
-      );
-    }
+    return TaskFormModelProvider(
+        model: _model, child: const _TaskFormScaffold());
   }
 }
 

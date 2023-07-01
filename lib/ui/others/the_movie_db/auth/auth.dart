@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:start_flutter/ui/main_navigation/main_navigation.dart';
 import 'package:start_flutter/ui/others/the_movie_db/core/constants.dart';
 
 class Auth extends StatefulWidget {
@@ -83,7 +84,7 @@ class _LoginFormState extends State<_LoginForm> {
   void _auth() {
     if (_usernameTextController.text == "admin" &&
         _passwordTextController.text == "admin") {
-      Navigator.of(context).pushNamed("/homeTheMovieDB");
+      Navigator.of(context).pushNamed(MainNavigationRoutesNames.homeMovieDb);
     }
   }
 
