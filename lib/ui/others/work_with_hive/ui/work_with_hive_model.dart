@@ -23,7 +23,7 @@ class WorkWithHiveModel {
   Future<void> read() async {
     var petBox = await Hive.openBox<Pet>("petBox");
     var box = await Hive.openBox<User>("test");
-    print(box.values);
+    // print(box.values);
     petBox.close();
     await box.close();
   }
