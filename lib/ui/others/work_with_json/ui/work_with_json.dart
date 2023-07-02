@@ -1,7 +1,5 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:start_flutter/ui/others/work_with_json/data/data.dart';
 
 class WorkWithJson extends StatelessWidget {
   const WorkWithJson({Key? key}) : super(key: key);
@@ -60,20 +58,20 @@ class JsonProvider extends InheritedWidget {
 
 class JsonCoder {
   void encode() {
-    final objects = humans.map((e) => e.toJson()).toList();
-    final jsonString = jsonEncode(objects);
-    print(jsonString);
+    // final objects = humans.map((e) => e.toJson()).toList();
+    // final jsonString = jsonEncode(objects);
+    // print(jsonString);
   }
 
   void decode() {
-    try {
-      // final json = jsonDecode(jsonString) as List<dynamic>;
-      // final human = json
-      //     .map((dynamic e) => Human.fromJson(e as Map<String, dynamic>))
-      //     .toList();
-      print("success");
-    } catch (error) {
-      print("error ->$error");
-    }
+  //   try {
+  //     final json = jsonDecode(jsonString) as List<dynamic>;
+  //     final human = json
+  //         .map((dynamic e) => Human.fromJson(e as Map<String, dynamic>))
+  //         .toList();
+  //     print("success");
+  //   } catch (error) {
+  //     print("error ->$error");
+  //   }
   }
 }

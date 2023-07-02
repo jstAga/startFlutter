@@ -3,13 +3,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:start_flutter/ui/main_navigation/main_navigation.dart';
+import 'package:start_flutter/ui/others/todo_list/data/box_manager/box_manager.dart';
 import 'package:start_flutter/ui/others/todo_list/data/entity/group/group.dart';
-import 'package:start_flutter/ui/others/todo_list/data/entity/task/task.dart';
+import 'package:start_flutter/ui/others/todo_list/ui/tasks/tasks_widget.dart';
 
 class GroupsModel extends ChangeNotifier {
   GroupsModel() {
     _setup();
   }
+
+  late final Future<Box<Group>> _groupsBox;
 
   var _groups = <Group>[];
 
@@ -20,28 +23,30 @@ class GroupsModel extends ChangeNotifier {
   }
 
   Future<void> toTasks(BuildContext context, int index) async {
-    final box = await Hive.openBox<Group>("groupsBox");
-    final groupKey = box.keyAt(index) as int;
-    unawaited(
-        Navigator.pushNamed(context, MainNavigationRoutesNames.tasks, arguments: groupKey));
+    final group = (await _groupsBox).getAt(index);
+    if (group != null) {
+      unawaited(Navigator.pushNamed(context, MainNavigationRoutesNames.tasks,
+          arguments: TasksWidgetConfiguration(
+              groupKey: group.key as int, title: group.groupName)));
+    }
   }
 
-  void _setup() async {
-    final box = await Hive.openBox<Group>("groupsBox");
-    await Hive.openBox<Task>("tasksBox");
-    _readGroups(box);
-    box.listenable().addListener(() => _readGroups(box));
+  Future<void> _setup() async {
+    _groupsBox = BoxManager.instance.openGroupBox();
+    await _readGroups();
+    (await _groupsBox).listenable().addListener(() => _readGroups());
   }
 
-  void _readGroups(Box<Group> box) {
-    _groups = box.values.toList();
+  Future<void> _readGroups() async {
+    _groups = (await _groupsBox).values.toList();
     notifyListeners();
   }
 
-  void deleteGroup(int index) async {
-    final box = await Hive.openBox<Group>("groupsBox");
-    await box.getAt(index)?.tasks?.deleteAllFromHive();
-    await box.deleteAt(index);
+  Future<void> deleteGroup(int index) async {
+    final groupKey = (await _groupsBox).keyAt(index) as int;
+    final taskBoxName = BoxManager.instance.makeTaskBoxName(groupKey);
+    await Hive.deleteBoxFromDisk(taskBoxName);
+    await (await _groupsBox).deleteAt(index);
   }
 }
 

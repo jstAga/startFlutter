@@ -67,7 +67,8 @@ class MainNavigation {
     switch (settings.name) {
       case MainNavigationRoutesNames.tasks:
         return MaterialPageRoute(builder: (context) {
-          return TasksWidget(groupKey: settings.arguments as int);
+          return TasksWidget(
+              configuration: settings.arguments as TasksWidgetConfiguration);
         });
 
       case MainNavigationRoutesNames.taskForm:
