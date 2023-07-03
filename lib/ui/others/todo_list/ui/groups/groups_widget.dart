@@ -16,6 +16,12 @@ class _GroupsWidgetState extends State<GroupsWidget> {
   Widget build(BuildContext context) {
     return GroupsModelProvider(model: _model, child: const _ScaffoldWidget());
   }
+
+  @override
+  void dispose() async {
+    super.dispose();
+    await _model.dispose();
+  }
 }
 
 class _ScaffoldWidget extends StatelessWidget {

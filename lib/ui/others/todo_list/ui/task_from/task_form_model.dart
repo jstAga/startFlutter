@@ -12,6 +12,7 @@ class TaskFormModel {
     if (taskText.isEmpty) return;
     final tasksBox = await BoxManager.instance.openTasksBox(groupKey);
     await tasksBox.add(Task(text: taskText, isDone: false));
+    await BoxManager.instance.closeBox(tasksBox);
     Navigator.pop(context);
   }
 }

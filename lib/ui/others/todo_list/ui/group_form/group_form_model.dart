@@ -7,8 +7,10 @@ class GroupFormModel {
 
   void saveGroup(BuildContext context) async {
     if (groupName.isEmpty) return;
-    final tasksBox = await BoxManager.instance.openGroupBox();
-    await tasksBox.add(Group(groupName: groupName));
+    final groupsBox = await BoxManager.instance.openGroupBox();
+    await groupsBox.add(Group(groupName: groupName));
+    await BoxManager.instance.closeBox(groupsBox);
+    await BoxManager.instance.closeBox(groupsBox);
     Navigator.pop(context);
   }
 }
