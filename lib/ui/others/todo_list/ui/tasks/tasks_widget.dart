@@ -31,6 +31,11 @@ class _TasksWidgetState extends State<TasksWidget> {
   Widget build(BuildContext context) {
     return TasksModelProvider(model: _model, child: const _ScaffoldWidget());
   }
+  @override
+  void dispose() async {
+    super.dispose();
+    await _model.dispose();
+  }
 }
 
 class _ScaffoldWidget extends StatelessWidget {
