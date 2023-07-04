@@ -1,16 +1,23 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/data/remote/api_client/api_client.dart';
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/data/remote/entity/love_response.dart';
+import 'package:start_flutter/ui/main_navigation/main_navigation.dart';
 
 class LoveHomeModel extends ChangeNotifier {
   final apiClient = ApiClient();
   LoveResponse? result;
 
-  Future<void> getLove(
-      {required String firstName, required String secondName}) async {
+  Future<void> toResult(
+      {required BuildContext context,
+      required String firstName,
+      required String secondName}) async {
     result =
         await apiClient.getLove(firstName: firstName, secondName: secondName);
     notifyListeners();
+    unawaited(Navigator.pushNamed(context, MainNavigationRoutesNames.loveCalculatorResult,
+        arguments: result));
   }
 }
 

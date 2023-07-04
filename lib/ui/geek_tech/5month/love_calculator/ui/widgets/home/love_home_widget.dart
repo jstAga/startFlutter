@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:start_flutter/resources/resources.dart';
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/ui/core/love_constants.dart';
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/ui/widgets/home/love_home_model.dart';
-import 'package:start_flutter/ui/main_navigation/main_navigation.dart';
 
 class LoveHomeWidget extends StatefulWidget {
   const LoveHomeWidget({super.key});
@@ -131,15 +130,14 @@ class _CalculateButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = LoveHomeProvider.read(context)?.model;
     return Center(
       child: ElevatedButton(
           onPressed: () async {
-            await LoveHomeProvider.read(context)?.model.getLove(
+            await model?.toResult(
                 firstName: firstNameController.text,
-                secondName: secondNameController.text);
-
-            await Navigator.pushNamed(context, MainNavigationRoutesNames.loveCalculatorResult,
-                arguments: LoveHomeProvider.read(context)!.model.result);
+                secondName: secondNameController.text,
+                context: context);
           },
           style: LoveConstants.baseLoveButton,
           child: const Text(
