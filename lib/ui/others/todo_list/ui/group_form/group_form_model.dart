@@ -14,7 +14,7 @@ class GroupFormModel extends ChangeNotifier {
     _groupName = value;
   }
 
-  void saveGroup(BuildContext context) async {
+  Future<void> saveGroup(BuildContext context) async {
     final groupName = _groupName.trim();
     if (groupName.isEmpty) {
       errorText = "Enter group name";
@@ -23,7 +23,6 @@ class GroupFormModel extends ChangeNotifier {
     }
     final groupsBox = await BoxManager.instance.openGroupBox();
     await groupsBox.add(Group(groupName: groupName));
-    await BoxManager.instance.closeBox(groupsBox);
     await BoxManager.instance.closeBox(groupsBox);
     Navigator.pop(context);
   }
