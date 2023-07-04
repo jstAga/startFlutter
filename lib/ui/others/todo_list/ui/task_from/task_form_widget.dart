@@ -31,13 +31,19 @@ class _TaskFormScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = TaskFormModelProvider
+        .watch(context)
+        ?.model;
+    final fab = FloatingActionButton(
+        onPressed: () => model?.saveTask(context),
+        child: const Icon(Icons.done));
     return Scaffold(
       appBar: AppBar(title: const Text("New task")),
       body: const Padding(
         padding: EdgeInsets.all(16),
         child: Center(child: _TaskNameWidget()),
       ),
-      floatingActionButton: const _FabWidget(),
+      floatingActionButton: model?.isValid == true ? fab : null,
     );
   }
 }
@@ -47,7 +53,9 @@ class _TaskNameWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = TaskFormModelProvider.read(context)?.model;
+    final model = TaskFormModelProvider
+        .read(context)
+        ?.model;
     return TextField(
       expands: true,
       minLines: null,
@@ -59,19 +67,6 @@ class _TaskNameWidget extends StatelessWidget {
       ),
       onEditingComplete: () => model?.saveTask(context),
       onChanged: (value) => model?.taskText = value,
-    );
-  }
-}
-
-class _FabWidget extends StatelessWidget {
-  const _FabWidget();
-
-  @override
-  Widget build(BuildContext context) {
-    final model = TaskFormModelProvider.read(context)?.model;
-    return FloatingActionButton(
-      onPressed: () => model?.saveTask(context),
-      child: const Icon(Icons.done),
     );
   }
 }
