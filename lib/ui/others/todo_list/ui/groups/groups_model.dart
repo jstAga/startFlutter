@@ -55,7 +55,7 @@ class GroupsModel extends ChangeNotifier {
   @override
   Future<void> dispose() async {
     _listenableBox?.removeListener(() => _readGroups());
-    await BoxManager.instance.closeBox((await _groupsBox));
+    await BoxManager.instance.closeBox(await _groupsBox);
     super.dispose();
   }
 }

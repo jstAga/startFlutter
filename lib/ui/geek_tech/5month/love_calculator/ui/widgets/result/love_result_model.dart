@@ -1,10 +1,19 @@
 import 'package:flutter/cupertino.dart';
+import 'package:start_flutter/ui/geek_tech/5month/love_calculator/data/local/hive/box_manager/box_manager.dart';
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/data/remote/entity/love_response.dart';
 
 class LoveResultModel {
   final LoveResponse response;
 
-  LoveResultModel({required this.response});
+  LoveResultModel({required this.response}) {
+    _save();
+  }
+
+  Future<void> _save() async {
+    final loveBox = await BoxManager.instance.openLoveBox();
+    await loveBox.add(response.toLoveEntity());
+    await BoxManager.instance.closeBox(loveBox);
+  }
 }
 
 class LoveResultProvider extends InheritedWidget {
