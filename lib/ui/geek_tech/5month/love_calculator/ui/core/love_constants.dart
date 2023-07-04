@@ -19,4 +19,10 @@ class LoveConstants {
 
   static const baseResultText =
       TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.w300);
+
+  static const bottomNavigationItems = [
+    BottomNavigationBarItem(icon: Icon(Icons.tv), label: "TV shows"),
+    BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+    BottomNavigationBarItem(icon: Icon(Icons.history), label: "History")
+  ];
 }

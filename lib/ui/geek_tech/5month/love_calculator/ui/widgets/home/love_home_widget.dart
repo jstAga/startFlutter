@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:start_flutter/resources/resources.dart';
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/ui/core/love_constants.dart';
+import 'package:start_flutter/ui/geek_tech/5month/love_calculator/ui/widgets/hive_history/hive_history_widget.dart';
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/ui/widgets/home/love_home_model.dart';
 
 class LoveHomeWidget extends StatefulWidget {
@@ -13,30 +14,71 @@ class LoveHomeWidget extends StatefulWidget {
 class _LoveHomeWidgetState extends State<LoveHomeWidget> {
   final model = LoveHomeModel();
 
+  var _selectedTab = 1;
+
+  void _onSelectedTab(int index) {
+    if (_selectedTab == index) return;
+    setState(() {
+      _selectedTab = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final firstNameController = TextEditingController();
     final secondNameController = TextEditingController();
     return Scaffold(
-      body: SafeArea(
-        child: LoveHomeProvider(
-          model: model,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Image(image: AssetImage(Images.hw2m5HomeBg)),
-              const _TitleWidget(),
-              const _FirstNameWidget(),
-              _FirstNameFieldWidget(controller: firstNameController),
-              const _SecondNameWidget(),
-              _SecondNameFieldWidget(controller: secondNameController),
-              const SizedBox(height: 8),
-              // const _CalculateButton()
-              _CalculateButton(
-                  firstNameController: firstNameController,
-                  secondNameController: secondNameController),
-            ],
-          ),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: LoveConstants.pink,
+        unselectedItemColor: Colors.grey,
+        backgroundColor: Colors.white,
+        items: LoveConstants.bottomNavigationItems,
+        currentIndex: _selectedTab,
+        onTap: _onSelectedTab,
+      ),
+      body: IndexedStack(index: _selectedTab, children: [
+        const Center(),
+        _BodyWidget(
+            model: model,
+            firstNameController: firstNameController,
+            secondNameController: secondNameController),
+        const HiveHistoryWidget()
+      ]),
+    );
+  }
+}
+
+class _BodyWidget extends StatelessWidget {
+  const _BodyWidget({
+    required this.model,
+    required this.firstNameController,
+    required this.secondNameController,
+  });
+
+  final LoveHomeModel model;
+  final TextEditingController firstNameController;
+  final TextEditingController secondNameController;
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: LoveHomeProvider(
+        model: model,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Image(image: AssetImage(Images.hw2m5HomeBg)),
+            const _TitleWidget(),
+            const _FirstNameWidget(),
+            _FirstNameFieldWidget(controller: firstNameController),
+            const _SecondNameWidget(),
+            _SecondNameFieldWidget(controller: secondNameController),
+            const SizedBox(height: 8),
+            // const _CalculateButton()
+            _CalculateButton(
+                firstNameController: firstNameController,
+                secondNameController: secondNameController)
+          ],
         ),
       ),
     );
