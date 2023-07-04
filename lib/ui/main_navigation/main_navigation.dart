@@ -37,7 +37,7 @@ abstract class MainNavigationRoutesNames {
 }
 
 class MainNavigation {
-  final initialRoute = MainNavigationRoutesNames.groups;
+  final initialRoute = MainNavigationRoutesNames.loveCalculator;
 
   final routes = <String, Widget Function(BuildContext)>{
     MainNavigationRoutesNames.hw6m2: (context) => const Hw6m2(),
@@ -46,18 +46,24 @@ class MainNavigation {
     MainNavigationRoutesNames.authMovieDb: (context) => const Auth(),
     MainNavigationRoutesNames.homeMovieDb: (context) => const MovieHome(),
     MainNavigationRoutesNames.movieDetail: (context) {
-      final argument = ModalRoute.of(context)?.settings.arguments;
+      final argument = ModalRoute
+          .of(context)
+          ?.settings
+          .arguments;
       if (argument is int) {
         return MovieDetail(id: argument);
       }
       return const MovieDetail(id: 0);
     },
     MainNavigationRoutesNames.loveCalculator: (context) =>
-        const LoveHomeWidget(),
+    const LoveHomeWidget(),
     MainNavigationRoutesNames.loveCalculatorResult: (context) {
       final argument =
-          ModalRoute.of(context)?.settings.arguments as LoveResponse;
-      return LoveResultWidget(result: argument);
+      ModalRoute
+          .of(context)
+          ?.settings
+          .arguments as LoveResponse;
+      return LoveResultWidget(response: argument);
     },
     MainNavigationRoutesNames.groups: (context) => const GroupsWidget(),
     MainNavigationRoutesNames.groupForm: (context) => const GroupFormWidget(),
@@ -65,6 +71,12 @@ class MainNavigation {
 
   Route<Object>? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case MainNavigationRoutesNames.loveCalculatorResult:
+        return MaterialPageRoute(builder: (context) {
+          return LoveResultWidget(
+            response: settings.arguments as LoveResponse,);
+        });
+
       case MainNavigationRoutesNames.tasks:
         return MaterialPageRoute(builder: (context) {
           return TasksWidget(
