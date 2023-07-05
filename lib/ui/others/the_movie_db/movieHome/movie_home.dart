@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/ui/others/the_movie_db/core/constants.dart';
+import 'package:start_flutter/ui/others/the_movie_db/core/movie_db_constants.dart';
 import 'package:start_flutter/ui/others/the_movie_db/movies/movies.dart';
 
-class MovieHome extends StatefulWidget {
-  const MovieHome({Key? key}) : super(key: key);
+class MovieHomeWidget extends StatefulWidget {
+  const MovieHomeWidget({Key? key}) : super(key: key);
 
   @override
-  State<MovieHome> createState() => _MovieHomeState();
+  State<MovieHomeWidget> createState() => _MovieHomeWidgetState();
 }
 
-class _MovieHomeState extends State<MovieHome> {
+class _MovieHomeWidgetState extends State<MovieHomeWidget> {
   int _selectedTab = 0;
 
   void _onSelectedTab(int index) {
@@ -23,7 +23,7 @@ class _MovieHomeState extends State<MovieHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(Constants.theMovieDbHomeTitle),
+        title: const Text(MovieDbConstants.theMovieDbHomeTitle),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedTab,

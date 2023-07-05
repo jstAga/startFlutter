@@ -5,7 +5,8 @@ import 'package:start_flutter/ui/geek_tech/5month/love_calculator/data/remote/en
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/ui/widgets/home/love_home_widget.dart';
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/ui/widgets/result/love_result_widget.dart';
 import 'package:start_flutter/ui/others/telegram_settings/telegram_settings.dart';
-import 'package:start_flutter/ui/others/the_movie_db/auth/auth.dart';
+import 'package:start_flutter/ui/others/the_movie_db/auth/auth_model.dart';
+import 'package:start_flutter/ui/others/the_movie_db/auth/auth_widget.dart';
 import 'package:start_flutter/ui/others/the_movie_db/movieDetail/movie_detail.dart';
 import 'package:start_flutter/ui/others/the_movie_db/movieHome/movie_home.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/group_form/group_form_widget.dart';
@@ -37,32 +38,27 @@ abstract class MainNavigationRoutesNames {
 }
 
 class MainNavigation {
-  final initialRoute = MainNavigationRoutesNames.loveCalculator;
+  final initialRoute = MainNavigationRoutesNames.authMovieDb;
 
   final routes = <String, Widget Function(BuildContext)>{
     MainNavigationRoutesNames.hw6m2: (context) => const Hw6m2(),
     MainNavigationRoutesNames.hw7m2: (context) => const Hw7m2(),
     MainNavigationRoutesNames.telegramSettings: (context) => TelegramSettings(),
-    MainNavigationRoutesNames.authMovieDb: (context) => const Auth(),
-    MainNavigationRoutesNames.homeMovieDb: (context) => const MovieHome(),
+    MainNavigationRoutesNames.authMovieDb: (context) =>
+        AuthProvider(model: AuthModel(), child: const AuthWidget()),
+    MainNavigationRoutesNames.homeMovieDb: (context) => const MovieHomeWidget(),
     MainNavigationRoutesNames.movieDetail: (context) {
-      final argument = ModalRoute
-          .of(context)
-          ?.settings
-          .arguments;
+      final argument = ModalRoute.of(context)?.settings.arguments;
       if (argument is int) {
-        return MovieDetail(id: argument);
+        return MovieDetailWidget(id: argument);
       }
-      return const MovieDetail(id: 0);
+      return const MovieDetailWidget(id: 0);
     },
     MainNavigationRoutesNames.loveCalculator: (context) =>
-    const LoveHomeWidget(),
+        const LoveHomeWidget(),
     MainNavigationRoutesNames.loveCalculatorResult: (context) {
       final argument =
-      ModalRoute
-          .of(context)
-          ?.settings
-          .arguments as LoveResponse;
+          ModalRoute.of(context)?.settings.arguments as LoveResponse;
       return LoveResultWidget(response: argument);
     },
     MainNavigationRoutesNames.groups: (context) => const GroupsWidget(),
@@ -74,7 +70,8 @@ class MainNavigation {
       case MainNavigationRoutesNames.loveCalculatorResult:
         return MaterialPageRoute(builder: (context) {
           return LoveResultWidget(
-            response: settings.arguments as LoveResponse,);
+            response: settings.arguments as LoveResponse,
+          );
         });
 
       case MainNavigationRoutesNames.tasks:

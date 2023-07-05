@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:start_flutter/resources/resources.dart';
 import 'package:start_flutter/ui/others/the_movie_db/movies/movies.dart';
 
-class Constants{
+class MovieDbConstants{
   //The Movie DB
   static const String theMovieDbAuthAppBar = "Login to your account";
   static const Color theMovieDbBackground = Color.fromRGBO(3, 37, 65, 1);
@@ -25,7 +25,7 @@ class Constants{
           const EdgeInsets.symmetric(vertical: 8, horizontal: 16)),
       textStyle: MaterialStateProperty.all(
           const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-      backgroundColor: MaterialStateProperty.all(Constants.theMovieDbBlue),
+      backgroundColor: MaterialStateProperty.all(MovieDbConstants.theMovieDbBlue),
       foregroundColor: MaterialStateProperty.all(Colors.white));
 
 
@@ -36,7 +36,7 @@ class Constants{
         fontSize: 16,
       )),
       foregroundColor:
-      MaterialStateProperty.all(Constants.theMovieDbBlue));
+      MaterialStateProperty.all(MovieDbConstants.theMovieDbBlue));
 
   static const String theMovieDbHomeTitle = "TMDB";
 
@@ -48,4 +48,9 @@ class Constants{
     MovieModel(id: 4,imageName: Images.mvdbExample, title: "The Super Mario Bros. Movie", time: "05 Apr 2023", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." ),
     MovieModel(id: 5,imageName: Images.mvdbExample2, title: "John Wick: Chapter 4 (2023)", time: "22 Mar 2023", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." ),
   ];
+
+  static const InputDecoration authInputDecoration = InputDecoration(
+      border: OutlineInputBorder(),
+      isCollapsed: true,
+      contentPadding: EdgeInsets.all(8));
 }
