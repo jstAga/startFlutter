@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:start_flutter/app/app_model.dart';
 
 import 'package:start_flutter/ui/main_navigation/main_navigation.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/movie_db_constants.dart';
 
 class App extends StatelessWidget {
-  const App({super.key});
+  const App({super.key, required this.model});
+
+  final AppModel model;
+  static final _mainNavigation = MainNavigation();
 
   @override
   Widget build(BuildContext context) {
-    final mainNavigation = MainNavigation();
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      initialRoute: mainNavigation.initialRoute,
-      routes: mainNavigation.routes,
-      onGenerateRoute: mainNavigation.onGenerateRoute,
+      initialRoute: _mainNavigation.initialRoute2(model.isAuth),
+      routes: _mainNavigation.routes,
+      onGenerateRoute: _mainNavigation.onGenerateRoute,
       theme: ThemeData(
           appBarTheme: const AppBarTheme(
               backgroundColor: MovieDbConstants.theMovieDbBackground),

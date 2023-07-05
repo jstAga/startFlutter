@@ -38,22 +38,22 @@ abstract class MainNavigationRoutesNames {
 }
 
 class MainNavigation {
-  final initialRoute = MainNavigationRoutesNames.authMovieDb;
+  // final initialRoute = MainNavigationRoutesNames.authMovieDb;
+
+  String initialRoute2(bool isAuth) => isAuth     //movieDb
+      ? MainNavigationRoutesNames.homeMovieDb
+      : MainNavigationRoutesNames.authMovieDb;
 
   final routes = <String, Widget Function(BuildContext)>{
+    //geek tech homeworks
     MainNavigationRoutesNames.hw6m2: (context) => const Hw6m2(),
     MainNavigationRoutesNames.hw7m2: (context) => const Hw7m2(),
     MainNavigationRoutesNames.telegramSettings: (context) => TelegramSettings(),
     MainNavigationRoutesNames.authMovieDb: (context) =>
+    //movieDb
         AuthProvider(model: AuthModel(), child: const AuthWidget()),
     MainNavigationRoutesNames.homeMovieDb: (context) => const MovieHomeWidget(),
-    MainNavigationRoutesNames.movieDetail: (context) {
-      final argument = ModalRoute.of(context)?.settings.arguments;
-      if (argument is int) {
-        return MovieDetailWidget(id: argument);
-      }
-      return const MovieDetailWidget(id: 0);
-    },
+    //love calculator
     MainNavigationRoutesNames.loveCalculator: (context) =>
         const LoveHomeWidget(),
     MainNavigationRoutesNames.loveCalculatorResult: (context) {
@@ -61,19 +61,26 @@ class MainNavigation {
           ModalRoute.of(context)?.settings.arguments as LoveResponse;
       return LoveResultWidget(response: argument);
     },
+    //todoList
     MainNavigationRoutesNames.groups: (context) => const GroupsWidget(),
     MainNavigationRoutesNames.groupForm: (context) => const GroupFormWidget(),
   };
 
   Route<Object>? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
+      //movieDb
+      case MainNavigationRoutesNames.movieDetail:
+        final args = settings.arguments;
+        final movieId = args is int ? args : 0;
+        return MaterialPageRoute(builder: (context) {
+          return MovieDetailWidget(id: movieId);
+        });
+      //love calculator
       case MainNavigationRoutesNames.loveCalculatorResult:
         return MaterialPageRoute(builder: (context) {
-          return LoveResultWidget(
-            response: settings.arguments as LoveResponse,
-          );
+          return LoveResultWidget(response: settings.arguments as LoveResponse);
         });
-
+      //todoList
       case MainNavigationRoutesNames.tasks:
         return MaterialPageRoute(builder: (context) {
           return TasksWidget(
