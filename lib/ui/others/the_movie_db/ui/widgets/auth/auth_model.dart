@@ -46,31 +46,7 @@ class AuthModel extends ChangeNotifier {
       return;
     }
     await _sessionDataProvider.setSessionId(sessionId);
-        Navigator.pushReplacementNamed(context, MainNavigationRoutesNames.homeMovieDb);
-  }
-}
-
-class AuthProvider extends InheritedNotifier {
-  const AuthProvider({
-    super.key,
-    required this.model,
-    required Widget child,
-  }) : super(notifier: model, child: child);
-
-  final AuthModel model;
-
-  static AuthProvider? watch(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<AuthProvider>();
-  }
-
-  static AuthProvider? read(BuildContext context) {
-    final widget =
-        context.getElementForInheritedWidgetOfExactType<AuthProvider>()?.widget;
-    return widget is AuthProvider ? widget : null;
-  }
-
-  @override
-  bool updateShouldNotify(AuthProvider oldWidget) {
-    return true;
+    Navigator.pushReplacementNamed(
+        context, MainNavigationRoutesNames.homeMovieDb);
   }
 }

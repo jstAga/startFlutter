@@ -5,10 +5,12 @@ import 'package:start_flutter/ui/geek_tech/5month/love_calculator/data/remote/en
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/ui/widgets/home/love_home_widget.dart';
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/ui/widgets/result/love_result_widget.dart';
 import 'package:start_flutter/ui/others/telegram_settings/telegram_settings.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/core/base_providers.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/auth/auth_model.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/auth/auth_widget.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieDetail/movie_detail.dart';
-import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieHome/movie_home.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieHome/movie_home_model.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieHome/movie_home_widget.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/group_form/group_form_widget.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/groups/groups_widget.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/task_from/task_form_widget.dart';
@@ -40,7 +42,7 @@ abstract class MainNavigationRoutesNames {
 class MainNavigation {
   // final initialRoute = MainNavigationRoutesNames.authMovieDb;
 
-  String initialRoute2(bool isAuth) => isAuth     //movieDb
+  String initialRoute2(bool isAuth) => isAuth //movieDb
       ? MainNavigationRoutesNames.homeMovieDb
       : MainNavigationRoutesNames.authMovieDb;
 
@@ -50,9 +52,10 @@ class MainNavigation {
     MainNavigationRoutesNames.hw7m2: (context) => const Hw7m2(),
     MainNavigationRoutesNames.telegramSettings: (context) => TelegramSettings(),
     MainNavigationRoutesNames.authMovieDb: (context) =>
-    //movieDb
-        AuthProvider(model: AuthModel(), child: const AuthWidget()),
-    MainNavigationRoutesNames.homeMovieDb: (context) => const MovieHomeWidget(),
+        //movieDb
+        BaseNotifierProvider(model: AuthModel(), child: const AuthWidget()),
+    MainNavigationRoutesNames.homeMovieDb: (context) =>
+        BaseNotifierProvider(model: MovieHomeModel(), child: const MovieHomeWidget()),
     //love calculator
     MainNavigationRoutesNames.loveCalculator: (context) =>
         const LoveHomeWidget(),
