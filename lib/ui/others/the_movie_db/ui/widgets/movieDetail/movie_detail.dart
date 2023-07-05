@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/ui/others/the_movie_db/core/movie_db_constants.dart';
-import 'package:start_flutter/ui/others/the_movie_db/movieDetail/movie_detail_main_info.dart';
-import 'package:start_flutter/ui/others/the_movie_db/movieDetail/movie_detail_screen_cast.dart';
-import 'package:start_flutter/ui/others/the_movie_db/movies/movies.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/core/movie_db_constants.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieDetail/movie_detail_main_info.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieDetail/movie_detail_screen_cast.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movies/movies.dart';
 
 class MovieDetailWidget extends StatefulWidget {
   final int id;

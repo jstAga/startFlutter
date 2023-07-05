@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:start_flutter/ui/main_navigation/main_navigation.dart';
-import 'package:start_flutter/ui/others/the_movie_db/core/movie_db_constants.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/core/movie_db_constants.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

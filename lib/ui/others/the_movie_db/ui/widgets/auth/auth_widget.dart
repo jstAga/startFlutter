@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/ui/others/the_movie_db/auth/auth_model.dart';
-import 'package:start_flutter/ui/others/the_movie_db/core/bases_ext.dart';
-import 'package:start_flutter/ui/others/the_movie_db/core/movie_db_constants.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases_ext.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/core/movie_db_constants.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/auth/auth_model.dart';
 
 class AuthWidget extends StatefulWidget {
   const AuthWidget({Key? key}) : super(key: key);
@@ -106,7 +106,7 @@ class _LoginForm extends StatelessWidget {
         ),
         Row(
           children: [
-            const _AuthButton(),
+            _AuthButton(),
             const SizedBox(width: 24),
             TextButton(
                 style: MovieDbConstants.baseTheMovieDbLinkButton,
@@ -127,10 +127,14 @@ class _AuthButton extends StatelessWidget {
     final model = AuthProvider.watch(context)?.model;
     final onPressed =
         model?.canStartAuth == true ? () => model?.auth(context) : null;
-    return TextButton(
+    final Widget child;
+    child = model?.isAuthInProgress == true
+        ? MovieDbConstants.loadingButton
+        : const Text(MovieDbConstants.theMovieDbLogin);
+    return ElevatedButton(
         style: MovieDbConstants.baseTheMovieDbButton,
         onPressed: onPressed,
-        child: const Text(MovieDbConstants.theMovieDbLogin));
+        child: child);
   }
 }
 
