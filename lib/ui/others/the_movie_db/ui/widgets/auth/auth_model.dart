@@ -46,7 +46,7 @@ class AuthModel extends ChangeNotifier {
       return;
     }
     await _sessionDataProvider.setSessionId(sessionId);
-        Navigator.pushNamed(context, MainNavigationRoutesNames.homeMovieDb);
+        Navigator.pushReplacementNamed(context, MainNavigationRoutesNames.homeMovieDb);
   }
 }
 
