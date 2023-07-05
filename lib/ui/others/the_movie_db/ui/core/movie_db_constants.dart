@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:start_flutter/resources/resources.dart';
-import 'package:start_flutter/ui/others/the_movie_db/movies/movies.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movies/movies.dart';
 
 class MovieDbConstants{
   //The Movie DB
@@ -53,4 +53,7 @@ class MovieDbConstants{
       border: OutlineInputBorder(),
       isCollapsed: true,
       contentPadding: EdgeInsets.all(8));
+
+  static const loadingButton = SizedBox(
+      width: 15, height: 15, child: CircularProgressIndicator(strokeWidth: 2));
 }

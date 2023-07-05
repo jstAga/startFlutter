@@ -5,10 +5,10 @@ import 'package:start_flutter/ui/geek_tech/5month/love_calculator/data/remote/en
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/ui/widgets/home/love_home_widget.dart';
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/ui/widgets/result/love_result_widget.dart';
 import 'package:start_flutter/ui/others/telegram_settings/telegram_settings.dart';
-import 'package:start_flutter/ui/others/the_movie_db/auth/auth_model.dart';
-import 'package:start_flutter/ui/others/the_movie_db/auth/auth_widget.dart';
-import 'package:start_flutter/ui/others/the_movie_db/movieDetail/movie_detail.dart';
-import 'package:start_flutter/ui/others/the_movie_db/movieHome/movie_home.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/auth/auth_model.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/auth/auth_widget.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieDetail/movie_detail.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieHome/movie_home.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/group_form/group_form_widget.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/groups/groups_widget.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/task_from/task_form_widget.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/ui/others/the_movie_db/core/bases_ext.dart';
-import 'package:start_flutter/ui/others/the_movie_db/movies/movies.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases_ext.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movies/movies.dart';
 
 class MovieDetailMainInfo extends StatelessWidget {
   final MovieModel movieModel;

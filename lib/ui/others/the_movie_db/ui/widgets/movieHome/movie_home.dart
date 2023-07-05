@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/ui/others/the_movie_db/core/movie_db_constants.dart';
-import 'package:start_flutter/ui/others/the_movie_db/movies/movies.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/core/movie_db_constants.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movies/movies.dart';
 
 class MovieHomeWidget extends StatefulWidget {
   const MovieHomeWidget({Key? key}) : super(key: key);
