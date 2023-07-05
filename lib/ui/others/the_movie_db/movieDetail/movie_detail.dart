@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/ui/others/the_movie_db/core/constants.dart';
+import 'package:start_flutter/ui/others/the_movie_db/core/movie_db_constants.dart';
 import 'package:start_flutter/ui/others/the_movie_db/movieDetail/movie_detail_main_info.dart';
 import 'package:start_flutter/ui/others/the_movie_db/movieDetail/movie_detail_screen_cast.dart';
 import 'package:start_flutter/ui/others/the_movie_db/movies/movies.dart';
 
-class MovieDetail extends StatefulWidget {
+class MovieDetailWidget extends StatefulWidget {
   final int id;
 
-  const MovieDetail({Key? key, required this.id}) : super(key: key);
+  const MovieDetailWidget({Key? key, required this.id}) : super(key: key);
 
   @override
-  State<MovieDetail> createState() => _MovieDetailState();
+  State<MovieDetailWidget> createState() => _MovieDetailWidgetState();
 }
 
-class _MovieDetailState extends State<MovieDetail> {
+class _MovieDetailWidgetState extends State<MovieDetailWidget> {
   @override
   Widget build(BuildContext context) {
-    final MovieModel movieModel = Constants.moviesData[widget.id];
+    final MovieModel movieModel = MovieDbConstants.moviesData[widget.id];
     return Scaffold(
       appBar: AppBar(
         title: Text(movieModel.title, maxLines: 1),

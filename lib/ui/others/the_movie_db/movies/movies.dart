@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:start_flutter/ui/main_navigation/main_navigation.dart';
-import 'package:start_flutter/ui/others/the_movie_db/core/constants.dart';
+import 'package:start_flutter/ui/others/the_movie_db/core/movie_db_constants.dart';
 
 class MovieModel {
   final int id;
@@ -31,11 +31,11 @@ class _MoviesState extends State<Movies> {
   void _searchMovies() {
     final query = _searchController.text;
     if (query.isNotEmpty) {
-      _filteredMovies = Constants.moviesData.where((MovieModel movie) {
+      _filteredMovies = MovieDbConstants.moviesData.where((MovieModel movie) {
         return movie.title.toLowerCase().contains(query.toLowerCase());
       }).toList();
     } else {
-      _filteredMovies = Constants.moviesData;
+      _filteredMovies = MovieDbConstants.moviesData;
     }
     setState(() {});
   }
@@ -44,7 +44,7 @@ class _MoviesState extends State<Movies> {
   void initState() {
     super.initState();
 
-    _filteredMovies = Constants.moviesData;
+    _filteredMovies = MovieDbConstants.moviesData;
     _searchController.addListener(() {
       _searchMovies();
     });
