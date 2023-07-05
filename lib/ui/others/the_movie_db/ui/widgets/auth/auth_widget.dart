@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/core/base_providers.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases_ext.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/movie_db_constants.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/auth/auth_model.dart';
@@ -76,7 +77,7 @@ class _LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = AuthProvider.read(context)?.model;
+    final model = BaseNotifierProvider.read<AuthModel>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -124,7 +125,7 @@ class _LoginForm extends StatelessWidget {
 class _AuthButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final model = AuthProvider.watch(context)?.model;
+    final model = BaseNotifierProvider.watch<AuthModel>(context);
     final onPressed =
         model?.canStartAuth == true ? () => model?.auth(context) : null;
     final Widget child;
@@ -143,7 +144,8 @@ class _ErrorMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final errorMessage = AuthProvider.watch(context)?.model.errorMessage;
+    final errorMessage =
+        BaseNotifierProvider.watch<AuthModel>(context)?.errorMessage;
     if (errorMessage == null) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
