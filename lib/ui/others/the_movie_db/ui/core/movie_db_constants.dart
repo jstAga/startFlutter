@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MovieDbConstants{
+class MovieDbConstants {
   //The Movie DB
   static const String theMovieDbAuthAppBar = "Login to your account";
   static const Color theMovieDbBackground = Color.fromRGBO(3, 37, 65, 1);
@@ -23,9 +23,9 @@ class MovieDbConstants{
           const EdgeInsets.symmetric(vertical: 8, horizontal: 16)),
       textStyle: MaterialStateProperty.all(
           const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-      backgroundColor: MaterialStateProperty.all(MovieDbConstants.theMovieDbBlue),
+      backgroundColor:
+          MaterialStateProperty.all(MovieDbConstants.theMovieDbBlue),
       foregroundColor: MaterialStateProperty.all(Colors.white));
-
 
   static final ButtonStyle baseTheMovieDbLinkButton = ButtonStyle(
       padding: MaterialStateProperty.all(
@@ -34,10 +34,9 @@ class MovieDbConstants{
         fontSize: 16,
       )),
       foregroundColor:
-      MaterialStateProperty.all(MovieDbConstants.theMovieDbBlue));
+          MaterialStateProperty.all(MovieDbConstants.theMovieDbBlue));
 
   static const String theMovieDbHomeTitle = "TMDB";
-
 
   static const InputDecoration authInputDecoration = InputDecoration(
       border: OutlineInputBorder(),
@@ -46,4 +45,18 @@ class MovieDbConstants{
 
   static const loadingButton = SizedBox(
       width: 15, height: 15, child: CircularProgressIndicator(strokeWidth: 2));
+
+  static final movieCardDecoration = BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(12),
+      border: Border.all(
+        color: Colors.black.withOpacity(0.2),
+        width: 1,
+      ),
+      boxShadow: [
+        BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 8,
+            offset: const Offset(0, 2))
+      ]);
 }
