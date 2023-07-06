@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/ui/others/the_movie_db/ui/core/base_providers.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases/base_providers.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases_ext.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/movie_db_constants.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/auth/auth_model.dart';

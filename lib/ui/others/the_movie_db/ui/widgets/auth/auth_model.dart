@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:start_flutter/ui/main_navigation/main_navigation.dart';
+import 'package:start_flutter/ui/others/the_movie_db/data/core/network/api_client_exception.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/local/data_provider/session_data_provider.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/remote/api_client/api_client.dart';
 
@@ -33,8 +34,18 @@ class AuthModel extends ChangeNotifier {
     String? sessionId;
     try {
       sessionId = await _apiClient.auth(username: username, password: password);
-    } catch (e) {
-      _errorMessage = "Username or password is incorrect";
+    } on ApiClientException catch (e) {
+      switch (e.type) {
+        case ApiClientExceptionType.network:
+          _errorMessage = "Server is not available. Check internet connection";
+          break;
+        case ApiClientExceptionType.auth:
+          _errorMessage = "Username or password is incorrect";
+          break;
+        case ApiClientExceptionType.other:
+          _errorMessage = "Unknown error try again";
+          break;
+      }
     }
     _isAuthLoading = false;
     if (errorMessage != null) {
