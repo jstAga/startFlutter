@@ -1,71 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/ui/main_navigation/main_navigation.dart';
-import 'package:start_flutter/ui/others/the_movie_db/ui/core/movie_db_constants.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases/base_providers.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movies/movies_model.dart';
 
-class MovieModel {
-  final int id;
-  final String imageName;
-  final String title;
-  final String time;
-  final String description;
-
-  MovieModel(
-      {required this.id,
-      required this.imageName,
-      required this.title,
-      required this.time,
-      required this.description});
-}
-
-class Movies extends StatefulWidget {
+class Movies extends StatelessWidget {
   const Movies({Key? key}) : super(key: key);
 
   @override
-  State<Movies> createState() => _MoviesState();
-}
-
-class _MoviesState extends State<Movies> {
-  final _searchController = TextEditingController();
-  var _filteredMovies = <MovieModel>[];
-
-  void _searchMovies() {
-    final query = _searchController.text;
-    if (query.isNotEmpty) {
-      _filteredMovies = MovieDbConstants.moviesData.where((MovieModel movie) {
-        return movie.title.toLowerCase().contains(query.toLowerCase());
-      }).toList();
-    } else {
-      _filteredMovies = MovieDbConstants.moviesData;
-    }
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    _filteredMovies = MovieDbConstants.moviesData;
-    _searchController.addListener(() {
-      _searchMovies();
-    });
-  }
-
-  void _onMovieTap(int index) {
-    Navigator.pushNamed(context, MainNavigationRoutesNames.movieDetail,
-        arguments: _filteredMovies[index].id);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final model = BaseNotifierProvider.watch<MoviesModel>(context);
+    if (model == null) return const SizedBox.shrink();
     return Stack(
       children: [
         ListView.builder(
             padding: const EdgeInsets.only(top: 70),
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            itemCount: _filteredMovies.length,
+            itemCount: model.movies.length ?? 0,
             itemExtent: 163,
             itemBuilder: (BuildContext context, int index) {
-              final movie = _filteredMovies[index];
+              final movie = model.movies[index];
               return Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -88,7 +40,7 @@ class _MoviesState extends State<Movies> {
                       clipBehavior: Clip.hardEdge,
                       child: Row(
                         children: [
-                          Image(image: AssetImage(movie.imageName)),
+                          // Image(image: AssetImage(movie.imageName)),
                           Expanded(
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
@@ -97,7 +49,7 @@ class _MoviesState extends State<Movies> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    movie.title,
+                                    movie.title ?? "No title",
                                     maxLines: 1,
                                     // style: const TextStyle(
                                     //     fontWeight: FontWeight.bold,
@@ -105,13 +57,13 @@ class _MoviesState extends State<Movies> {
                                   ),
                                   const SizedBox(height: 5),
                                   Text(
-                                    movie.time,
+                                    movie.releaseDate.toString(),
                                     maxLines: 1,
                                     style: const TextStyle(color: Colors.grey),
                                   ),
                                   const SizedBox(height: 10),
                                   Text(
-                                    movie.description,
+                                    movie.overview ?? "No description",
                                     maxLines: 3,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -126,7 +78,7 @@ class _MoviesState extends State<Movies> {
                       color: Colors.transparent,
                       child: InkWell(
                         borderRadius: BorderRadius.circular(12),
-                        onTap: () => _onMovieTap(index),
+                        onTap: () => model.toDetail(context, index),
                       ),
                     )
                   ],
@@ -136,7 +88,7 @@ class _MoviesState extends State<Movies> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           child: TextField(
-            controller: _searchController,
+            // controller: _searchController,
             decoration: InputDecoration(
                 labelText: "Search",
                 isDense: true,

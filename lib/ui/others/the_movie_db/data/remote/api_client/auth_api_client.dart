@@ -1,12 +1,13 @@
 import 'dart:io';
 
 import 'package:start_flutter/ui/others/the_movie_db/data/core/network/base_api_client.dart';
+import 'package:start_flutter/ui/others/the_movie_db/data/remote/movie_db_constants.dart';
 
-class ApiClient {
-  static const _host = "https://api.themoviedb.org/3";
-  static const _apiKey = "db4f25ed06d95e5c2ca4d4695470a0dd";
-  final _baseApiClient =
-      BaseApiClient(host: _host, client: HttpClient(), apiKey: _apiKey);
+class AuthApiClient {
+  final _baseApiClient = BaseApiClient(
+      host: MovieDbConstants.baseUrl,
+      client: HttpClient(),
+      apiKey: MovieDbConstants.apiKey);
 
   Future<String> auth(
       {required String username, required String password}) async {
@@ -24,8 +25,8 @@ class ApiClient {
       return token;
     }
 
-    final result = _baseApiClient.get("/authentication/token/new?", parser,
-        <String, dynamic>{"api_key": _apiKey});
+    final result = _baseApiClient.get(MovieDbConstants.getToken, parser,
+        <String, dynamic>{"api_key": MovieDbConstants.apiKey});
 
     return result;
   }
@@ -47,10 +48,10 @@ class ApiClient {
     };
 
     final result = _baseApiClient.post(
-        "/authentication/token/validate_with_login?",
+        MovieDbConstants.postValidateUser,
         parser,
         bodyParameters,
-        <String, dynamic>{"api_key": _apiKey});
+        <String, dynamic>{"api_key": MovieDbConstants.apiKey});
     return result;
   }
 
@@ -63,8 +64,8 @@ class ApiClient {
 
     final bodyParameters = <String, dynamic>{"request_token": requestToken};
 
-    final result = _baseApiClient.post("/authentication/session/new?", parser,
-        bodyParameters, <String, dynamic>{"api_key": _apiKey});
+    final result = _baseApiClient.post(MovieDbConstants.postSession, parser,
+        bodyParameters, <String, dynamic>{"api_key": MovieDbConstants.apiKey});
     return result;
   }
 }

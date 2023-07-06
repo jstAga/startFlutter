@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases_ext.dart';
-import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movies/movies.dart';
 
 class MovieDetailMainInfo extends StatelessWidget {
-  final MovieModel movieModel;
 
-  const MovieDetailMainInfo({Key? key, required this.movieModel})
-      : super(key: key);
+  // const MovieDetailMainInfo({Key? key, required this.movieModel})
+  //     : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      _TopPosters(
-        imageName: movieModel.imageName,
-      ),
-      Padding(
-          padding: const EdgeInsets.all(20),
-          child: _MovieName(year: " (2022)", title: movieModel.title)),
+      // _TopPosters(
+      //   imageName: movieModel.imageName,
+      // ),
+      // Padding(
+      //     padding: const EdgeInsets.all(20),
+      //     child: _MovieName(year: " (2022)", title: movieModel.title)),
       const _Score(),
       const _MovieInfo(),
       const _Overview(),
-      _Description(movieModel: movieModel),
+      // _Description(movieModel: movieModel),
       const _ActorsInfo()
     ]);
   }
@@ -109,19 +107,17 @@ class _ActorsInfo extends StatelessWidget {
 }
 
 class _Description extends StatelessWidget {
-  const _Description({
-    required this.movieModel,
-  });
+  const _Description();
 
-  final MovieModel movieModel;
 
-  @override
+  // @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: Text(movieModel.description,
-          style: BaseTextStyle.baseSimilarText(Colors.white)),
-    );
+    // return Padding(
+    //   padding: const EdgeInsets.all(8),
+    //   child: Text(movieModel.description,
+    //       style: BaseTextStyle.baseSimilarText(Colors.white)),
+    // );
+    return SizedBox.shrink();
   }
 }
 

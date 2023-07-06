@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/resources/resources.dart';
-import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movies/movies.dart';
 
 class MovieDbConstants{
   //The Movie DB
@@ -40,14 +38,6 @@ class MovieDbConstants{
 
   static const String theMovieDbHomeTitle = "TMDB";
 
-  static final moviesData = [
-    MovieModel(id: 0,imageName: Images.mvdbExample, title: "The Super Mario Bros. Movie", time: "05 Apr 2023", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." ),
-    MovieModel(id: 1,imageName: Images.mvdbExample2, title: "John Wick: Chapter 4 (2023)", time: "22 Mar 2023", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." ),
-    MovieModel(id: 2,imageName: Images.mvdbExample, title: "The Super Mario Bros. Movie", time: "05 Apr 2023", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." ),
-    MovieModel(id: 3,imageName: Images.mvdbExample2, title: "John Wick: Chapter 4 (2023)", time: "22 Mar 2023", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." ),
-    MovieModel(id: 4,imageName: Images.mvdbExample, title: "The Super Mario Bros. Movie", time: "05 Apr 2023", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." ),
-    MovieModel(id: 5,imageName: Images.mvdbExample2, title: "John Wick: Chapter 4 (2023)", time: "22 Mar 2023", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." ),
-  ];
 
   static const InputDecoration authInputDecoration = InputDecoration(
       border: OutlineInputBorder(),

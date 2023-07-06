@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/local/data_provider/session_data_provider.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases/base_providers.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/movie_db_constants.dart';
-import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movies/movies.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movies/movies_model.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movies/movies_widget.dart';
 
 class MovieHomeWidget extends StatefulWidget {
   const MovieHomeWidget({Key? key}) : super(key: key);
@@ -11,7 +13,14 @@ class MovieHomeWidget extends StatefulWidget {
 }
 
 class _MovieHomeWidgetState extends State<MovieHomeWidget> {
+  final movieModel = MoviesModel();
   int _selectedTab = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    movieModel.getMovies();
+  }
 
   void _onSelectedTab(int index) {
     if (_selectedTab == index) return;
@@ -43,7 +52,11 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
       ),
       body: IndexedStack(
         index: _selectedTab,
-        children: const [Movies(), Text("Home"), Text("Tv shows")],
+        children: [
+          BaseNotifierProvider(model: movieModel, child: const Movies()),
+          const Text("Home"),
+          const Text("Tv shows")
+        ],
       ),
     );
   }

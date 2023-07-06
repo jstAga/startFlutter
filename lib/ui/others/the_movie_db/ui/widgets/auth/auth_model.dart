@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:start_flutter/ui/main_navigation/main_navigation.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/core/network/api_client_exception.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/local/data_provider/session_data_provider.dart';
-import 'package:start_flutter/ui/others/the_movie_db/data/remote/api_client/api_client.dart';
+import 'package:start_flutter/ui/others/the_movie_db/data/remote/api_client/auth_api_client.dart';
 
 class AuthModel extends ChangeNotifier {
-  final _apiClient = ApiClient();
+  final _apiClient = AuthApiClient();
   final _sessionDataProvider = SessionDataProvider();
   final usernameTextController = TextEditingController();
   final passwordTextController = TextEditingController();
