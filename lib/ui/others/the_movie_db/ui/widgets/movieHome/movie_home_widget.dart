@@ -17,9 +17,9 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
   int _selectedTab = 0;
 
   @override
-  void initState() {
-    super.initState();
-    movieModel.getMovies();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    movieModel.setupLocalization(context);
   }
 
   void _onSelectedTab(int index) {

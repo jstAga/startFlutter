@@ -48,7 +48,6 @@ class BaseApiClient {
     } on ApiClientException {
       rethrow;
     } catch (e) {
-      print("SUKA $e");
       throw ApiClientException(ApiClientExceptionType.other);
     }
   }

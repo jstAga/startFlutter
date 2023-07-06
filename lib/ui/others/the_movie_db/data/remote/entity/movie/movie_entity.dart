@@ -1,4 +1,6 @@
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:start_flutter/ui/others/the_movie_db/data/remote/movie_db_constants.dart';
 
 part 'movie_entity.g.dart';
 
@@ -36,6 +38,8 @@ class MovieEntity {
   final bool? video;
   final double? voteAverage;
   final int? videoCount;
+
+  get image => MovieDbConstants.baseImage + (posterPath ?? "");
 
   factory MovieEntity.fromJson(Map<String, dynamic> json) =>
       _$MovieEntityFromJson(json);

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:start_flutter/ui/others/the_movie_db/data/remote/entity/movie/movie_entity.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases/base_providers.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/core/movie_db_constants.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movies/movies_model.dart';
 
 class Movies extends StatelessWidget {
@@ -14,7 +16,7 @@ class Movies extends StatelessWidget {
         ListView.builder(
             padding: const EdgeInsets.only(top: 70),
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            itemCount: model.movies.length ?? 0,
+            itemCount: model.movies.length,
             itemExtent: 163,
             itemBuilder: (BuildContext context, int index) {
               final movie = model.movies[index];
@@ -24,23 +26,14 @@ class Movies extends StatelessWidget {
                 child: Stack(
                   children: [
                     Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(
-                            color: Colors.black.withOpacity(0.2),
-                            width: 1,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 8,
-                                offset: const Offset(0, 2))
-                          ]),
+                      decoration: MovieDbConstants.movieCardDecoration,
                       clipBehavior: Clip.hardEdge,
                       child: Row(
                         children: [
-                          // Image(image: AssetImage(movie.imageName)),
+                          Image.network(
+                            movie.image,
+                            width: 95,
+                          ),
                           Expanded(
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
@@ -48,25 +41,15 @@ class Movies extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    movie.title ?? "No title",
-                                    maxLines: 1,
-                                    // style: const TextStyle(
-                                    //     fontWeight: FontWeight.bold,
-                                    //     color: Colors.black)
-                                  ),
+                                  _Title(movie: movie),
                                   const SizedBox(height: 5),
                                   Text(
-                                    movie.releaseDate.toString(),
+                                    model.date(movie.releaseDate),
                                     maxLines: 1,
                                     style: const TextStyle(color: Colors.grey),
                                   ),
                                   const SizedBox(height: 10),
-                                  Text(
-                                    movie.overview ?? "No description",
-                                    maxLines: 3,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
+                                  _Overview(movie: movie),
                                 ],
                               ),
                             ),
@@ -85,24 +68,64 @@ class Movies extends StatelessWidget {
                 ),
               );
             }),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          child: TextField(
-            // controller: _searchController,
-            decoration: InputDecoration(
-                labelText: "Search",
-                isDense: true,
-                suffixIcon: const Icon(
-                  Icons.search,
-                  color: Colors.blueAccent,
-                ),
-                fillColor: Colors.white.withOpacity(0.8),
-                filled: true,
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12))),
-          ),
-        )
+        const _Search()
       ],
+    );
+  }
+}
+
+class _Overview extends StatelessWidget {
+  const _Overview({required this.movie});
+
+  final MovieEntity movie;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      movie.overview ?? "No description",
+      maxLines: 3,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+}
+
+class _Title extends StatelessWidget {
+  const _Title({
+    required this.movie,
+  });
+
+  final MovieEntity movie;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(movie.title ?? "No title",
+        maxLines: 1,
+        style:
+            const TextStyle(fontWeight: FontWeight.bold, color: Colors.black));
+  }
+}
+
+class _Search extends StatelessWidget {
+  const _Search();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      child: TextField(
+        // controller: _searchController,
+        decoration: InputDecoration(
+            labelText: "Search",
+            isDense: true,
+            suffixIcon: const Icon(
+              Icons.search,
+              color: Colors.blueAccent,
+            ),
+            fillColor: Colors.white.withOpacity(0.8),
+            filled: true,
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(12))),
+      ),
     );
   }
 }
