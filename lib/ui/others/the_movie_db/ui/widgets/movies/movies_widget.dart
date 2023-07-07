@@ -4,9 +4,14 @@ import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases/base_provider
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/movie_db_constants.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movies/movies_model.dart';
 
-class Movies extends StatelessWidget {
+class Movies extends StatefulWidget {
   const Movies({Key? key}) : super(key: key);
 
+  @override
+  State<Movies> createState() => _MoviesState();
+}
+
+class _MoviesState extends State<Movies> {
   @override
   Widget build(BuildContext context) {
     final model = BaseNotifierProvider.watch<MoviesModel>(context);
@@ -19,6 +24,7 @@ class Movies extends StatelessWidget {
             itemCount: model.movies.length,
             itemExtent: 163,
             itemBuilder: (BuildContext context, int index) {
+              model.getCurrentMovieIndex(index);
               final movie = model.movies[index];
               return Padding(
                 padding:

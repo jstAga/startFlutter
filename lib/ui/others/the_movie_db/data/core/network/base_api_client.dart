@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:start_flutter/ui/others/the_movie_db/data/core/network/api_client_exception.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/core/network/network_ext.dart';
-import 'package:start_flutter/ui/others/the_movie_db/data/remote/entity/movie_response/movie_response.dart';
 
 class BaseApiClient {
   BaseApiClient(
@@ -40,7 +39,6 @@ class BaseApiClient {
       final dynamic json = (await response.jsonDecode());
 
       _validateResponse(response, json);
-      print(MovieResponse.fromJson(json as Map<String, dynamic>));
       final result = parser(json);
       return result;
     } on SocketException {
