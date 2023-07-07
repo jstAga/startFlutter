@@ -1,4 +1,3 @@
-import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/remote/movie_db_constants.dart';
 

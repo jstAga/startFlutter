@@ -8,6 +8,9 @@ class MoviesModel extends ChangeNotifier {
   final _apiClient = MoviesApiClient();
   final _movies = <MovieEntity>[];
   late DateFormat _date;
+  late int _currentPage;
+  late int _totalPages;
+  bool _isLoading = false;
   String _local = "";
 
   List<MovieEntity> get movies => _movies;
@@ -15,24 +18,41 @@ class MoviesModel extends ChangeNotifier {
   String date(DateTime? releaseDate) =>
       releaseDate != null ? _date.format(releaseDate) : "";
 
+  void toDetail(BuildContext context, int index) {
+    final id = _movies[index].id;
+    Navigator.pushNamed(context, MainNavigationRoutesNames.movieDetail,
+        arguments: id);
+  }
+
   void setupLocalization(BuildContext context) {
     final local = Localizations.localeOf(context).toLanguageTag();
     if (_local == local) return;
     _local = local;
     _date = DateFormat.yMMMd(local);
+    _currentPage = 0;
+    _totalPages = 1;
     movies.clear();
     _getMovies();
   }
 
   Future<void> _getMovies() async {
-    final moviesResponse = await _apiClient.getMovies(1, _local);
-    _movies.addAll(moviesResponse.results);
-    notifyListeners();
+    if (_isLoading || _currentPage >= _totalPages) return;
+    _isLoading = true;
+    final nextPage = _currentPage + 1;
+    try {
+      final moviesResponse = await _apiClient.getMovies(nextPage, _local);
+      _movies.addAll(moviesResponse.results);
+      _currentPage = moviesResponse.page;
+      _totalPages = moviesResponse.totalPages!;
+      _isLoading = false;
+      notifyListeners();
+    } catch (e) {
+      _isLoading = false;
+    }
   }
 
-  void toDetail(BuildContext context, int index) {
-    final id = _movies[index].id;
-    Navigator.pushNamed(context, MainNavigationRoutesNames.movieDetail,
-        arguments: id);
+  void getCurrentMovieIndex(int index) {
+    if (index < _movies.length - 1) return;
+    _getMovies();
   }
 }
