@@ -8,4 +8,5 @@ class MovieDbConstants {
   static const postSession = "/authentication/session/new?";
 
   static const getMovies = "/movie/popular";
+  static const searchMovie = "/search/movie";
 }

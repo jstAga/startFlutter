@@ -74,7 +74,7 @@ class _MoviesState extends State<Movies> {
                 ),
               );
             }),
-        const _Search()
+         _Search(model: model)
       ],
     );
   }
@@ -112,13 +112,16 @@ class _Title extends StatelessWidget {
 }
 
 class _Search extends StatelessWidget {
-  const _Search();
+  const _Search({required this.model});
+
+  final MoviesModel model;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       child: TextField(
+        onChanged: model.searchMovies,
         // controller: _searchController,
         decoration: InputDecoration(
             labelText: "Search",
