@@ -10,20 +10,30 @@ class MoviesApiClient {
       client: HttpClient(),
       apiKey: MovieDbConstants.apiKey);
 
-  Future<MovieResponse> getMovies(int page, String language) async {
-    parser(dynamic json) {
-      final jsonMap = json as Map<String, dynamic>;
-      final response = MovieResponse.fromJson(jsonMap);
-      return response;
-    }
+  MovieResponse _movieResponseParser(dynamic json) {
+    final jsonMap = json as Map<String, dynamic>;
+    final response = MovieResponse.fromJson(jsonMap);
+    return response;
+  }
 
-    final result = _baseApiClient
-        .get(MovieDbConstants.getMovies, parser, <String, dynamic>{
+  Future<MovieResponse> getMovies(int page, String language) async {
+    final result = _baseApiClient.get(
+        MovieDbConstants.getMovies, _movieResponseParser, <String, dynamic>{
       "api_key": MovieDbConstants.apiKey,
       "page": page.toString(),
       "language": language,
     });
+    return result;
+  }
 
+  Future<MovieResponse> searchMovies(String query, int page, String language) {
+    final result = _baseApiClient.get(
+        MovieDbConstants.searchMovie, _movieResponseParser, <String, dynamic>{
+      "api_key": MovieDbConstants.apiKey,
+      "query": query,
+      "page": page.toString(),
+      "language": language,
+    });
     return result;
   }
 }
