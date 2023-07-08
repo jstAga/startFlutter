@@ -79,6 +79,7 @@ class MoviesModel extends ChangeNotifier {
   }
 
   void getCurrentMovieIndex(int index) {
+    print(_movies[index].id);
     if (index < _movies.length - 1) return;
     _getNextPage();
   }
