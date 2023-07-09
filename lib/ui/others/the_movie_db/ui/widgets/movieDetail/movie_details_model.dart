@@ -15,6 +15,7 @@ class MovieDetailsModel extends ChangeNotifier {
   MovieDetailsEntity? get movieDetails => _movieDetails;
 
   Future<void> setupLocalization(BuildContext context) async {
+    print(movieId);
     final local = Localizations.localeOf(context).toLanguageTag();
     if (_local == local) return;
     _local = local;

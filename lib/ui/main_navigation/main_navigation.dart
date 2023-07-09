@@ -12,6 +12,7 @@ import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieDetail/movi
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieDetail/movie_details_model.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieHome/movie_home_model.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieHome/movie_home_widget.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieTrailer/movie_trailer_widget.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/group_form/group_form_widget.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/groups/groups_widget.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/task_from/task_form_widget.dart';
@@ -32,6 +33,7 @@ abstract class MainNavigationRoutesNames {
   static const authMovieDb = "authTheMovieDB";
   static const homeMovieDb = "homeTheMovieDB";
   static const movieDetail = "homeTheMovieDB/movieDetail";
+  static const movieTrailer = "homeTheMovieDB/movieDetail/trailer";
 
   //todoList
   static const groups = "todoList";
@@ -80,6 +82,12 @@ class MainNavigation {
           return NotifierProvider(
               create: () => MovieDetailsModel(movieId: movieId),
               child: const MovieDetailsWidget());
+        });
+      case MainNavigationRoutesNames.movieTrailer:
+        return MaterialPageRoute(builder: (context) {
+          final args = settings.arguments;
+          final trailerKey = args is String? args : "";
+          return MovieTrailerWidget(trailerKey: trailerKey,);
         });
       //love calculator
       case MainNavigationRoutesNames.loveCalculatorResult:

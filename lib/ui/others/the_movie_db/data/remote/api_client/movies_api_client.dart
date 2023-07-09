@@ -41,15 +41,17 @@ class MoviesApiClient {
   MovieDetailsEntity _movieDetailsParser(dynamic json) {
     final jsonMap = json as Map<String, dynamic>;
     final response = MovieDetailsEntity.fromJson(jsonMap);
+    print(response.videos);
     return response;
   }
 
-  Future<MovieDetailsEntity> getDetails(int id, String language) {
-    final result = _baseApiClient.get("${MovieDbConstants.movieDetails}$id?",
+  Future<MovieDetailsEntity> getDetails(int movieId, String language) {
+    final result = _baseApiClient.get(
+        "${MovieDbConstants.movieDetails}$movieId?",
         _movieDetailsParser, <String, dynamic>{
       "api_key": MovieDbConstants.apiKey,
       "language": language,
-      "append_to_response": "credits"
+      "append_to_response": "credits,videos"
     });
     return result;
   }

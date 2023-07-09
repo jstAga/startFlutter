@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/remote/entity/credits/credits_entity.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/remote/entity/data_ext.dart';
+import 'package:start_flutter/ui/others/the_movie_db/data/remote/entity/trailer/trailer_entity.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/remote/movie_db_constants.dart';
 
 part 'movie_details.g.dart';
@@ -34,7 +35,8 @@ class MovieDetailsEntity {
       this.video,
       this.voteAverage,
       this.voteCount,
-      this.credits});
+      this.credits,
+      this.videos});
 
   final bool? adult;
   final String? backdropPath;
@@ -63,6 +65,7 @@ class MovieDetailsEntity {
   final num? voteAverage;
   final num? voteCount;
   final CreditsEntity? credits;
+  final TrailerResponse? videos;
 
   get allInfo {
     return "($_allCountries) $_duration, $_allGenres";
