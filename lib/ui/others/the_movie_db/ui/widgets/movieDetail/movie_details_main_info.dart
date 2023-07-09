@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:start_flutter/ui/others/the_movie_db/data/remote/entity/credits/credits_entity.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases/base_providers.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases_ext.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieDetail/movie_details_model.dart';
@@ -10,14 +11,12 @@ class MovieDetailsMainInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       _TopPoster(),
-      Padding(
-          padding: const EdgeInsets.all(20),
-          child: _MovieName()),
+      Padding(padding: const EdgeInsets.all(20), child: _MovieName()),
       const _Score(),
-      _MovieInfo(),
+      const _MovieInfo(),
       const _Overview(),
       const _Description(),
-      _ActorsInfo()
+      const _CrewInfo()
     ]);
   }
 }
@@ -27,79 +26,83 @@ class _Score extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final voteAverage = NotifierProvider.watch<MovieDetailsModel>(context)
+            ?.movieDetails
+            ?.voteAverage ??
+        0;
+    final score = (voteAverage * 10).round() / 10;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         TextButton(
             onPressed: () {},
-            child: Text("User Score",
-                style: BaseTextStyle.baseSimilarBoldText(Colors.white))),
+            child: Text("$score / 10 User Score",
+                style: BaseTextStyle.baseSimilarBoldText(Colors.lightBlue))),
         Container(width: 1, height: 15, color: Colors.white),
         TextButton(
             onPressed: () {},
             child: Text("Play Trailer",
-                style: BaseTextStyle.baseSimilarBoldText(Colors.white)))
+                style: BaseTextStyle.baseSimilarBoldText(Colors.lightBlue)))
       ],
     );
   }
 }
 
-class _ActorsInfo extends StatelessWidget {
-  const _ActorsInfo();
+class _CrewInfo extends StatelessWidget {
+  const _CrewInfo();
 
   @override
   build(BuildContext context) {
+    final List<List<Crew>> crewChunks =
+        NotifierProvider.watch<MovieDetailsModel>(context)
+            ?.movieDetails
+            ?.crewChunks;
+
+    return Column(
+      children: crewChunks
+          .map((chunk) => Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: _CrewRow(crewList: chunk),
+              ))
+          .toList(),
+    );
+  }
+}
+
+class _CrewRow extends StatelessWidget {
+  const _CrewRow({required this.crewList});
+
+  final List<Crew> crewList;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: crewList.map((crew) => _CrewRowItem(crew: crew)).toList()),
+    );
+  }
+}
+
+class _CrewRowItem extends StatelessWidget {
+  const _CrewRowItem({required this.crew});
+
+  final Crew crew;
+
+  @override
+  Widget build(BuildContext context) {
     const jobStyle = TextStyle(
         fontSize: 14, fontWeight: FontWeight.w400, color: Colors.white);
-    return Column(
-      children: [
-        const SizedBox(height: 20),
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Derek Kolstad",
-                    style: BaseTextStyle.baseSimilarText(Colors.white)),
-                const Text("Characters", style: jobStyle),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Chad Stahelski",
-                    style: BaseTextStyle.baseSimilarText(Colors.white)),
-                const Text("Director", style: jobStyle),
-              ],
-            )
-          ],
-        ),
-        const SizedBox(height: 20),
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Derek Kolstad",
-                    style: BaseTextStyle.baseSimilarText(Colors.white)),
-                const Text("Characters", style: jobStyle),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Chad Stahelski",
-                    style: BaseTextStyle.baseSimilarText(Colors.white)),
-                const Text("Director", style: jobStyle),
-              ],
-            )
-          ],
-        ),
-      ],
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(crew.name ?? "",
+              style: BaseTextStyle.baseSimilarText(Colors.white)),
+          Text(crew.job ?? "", style: jobStyle),
+        ],
+      ),
     );
   }
 }
@@ -136,39 +139,51 @@ class _Overview extends StatelessWidget {
 class _TopPoster extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final imageUrl =
-        NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails?.image;
+    final model =
+        NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
+    final backdropPath = model?.backdrop;
+    final posterPath = model?.poster;
 
-    return Stack(
-      children: [
-        Image.network(
-            imageUrl ??
-                "https://w0.peakpx.com/wallpaper/200/532/HD-wallpaper-black-plain-thumbnail.jpg",
-            width: double.infinity,
-            fit: BoxFit.fitWidth),
-      ],
+    return AspectRatio(
+      aspectRatio: 390 / 219,
+      child: Stack(
+        children: [
+          backdropPath != null
+              ? Image.network(model!.backdrop,
+                  width: double.infinity, fit: BoxFit.fitWidth)
+              : const SizedBox.shrink(),
+          Positioned(
+            top: 20,
+            left: 20,
+            bottom: 20,
+            child: Image.network(posterPath),
+          )
+        ],
+      ),
     );
   }
 }
 
 class _MovieName extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final model =
         NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
-    return RichText(
-      textAlign: TextAlign.center,
-      maxLines: 3,
-      text: TextSpan(
-        children: <TextSpan>[
-          TextSpan(
-              text: model?.title, style: BaseTextStyle.baseTitleText(Colors.white)),
-          TextSpan(
-            text: "(${model?.releaseDate?.year.toString()})",
-            style: BaseTextStyle.baseTitleText(Colors.white),
-          )
-        ],
+    return Center(
+      child: RichText(
+        textAlign: TextAlign.center,
+        maxLines: 3,
+        text: TextSpan(
+          children: <TextSpan>[
+            TextSpan(
+                text: model?.title,
+                style: BaseTextStyle.baseTitleText(Colors.white)),
+            TextSpan(
+              text: " (${model?.releaseDate?.year})",
+              style: BaseTextStyle.baseTitleText(Colors.white),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -186,7 +201,7 @@ class _MovieInfo extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 60),
         child: Text(
-          "(${model?.allCountries}) ${model?.allGenres}",
+          model?.allInfo,
           textAlign: TextAlign.center,
           maxLines: 3,
           style: BaseTextStyle.baseSimilarText(Colors.white),

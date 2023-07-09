@@ -21,23 +21,36 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // final movieModel = MovieDbConstants.moviesData[widget.id];
     return Scaffold(
       appBar: AppBar(
         title: const _Title(),
       ),
-      body: ColoredBox(
-        color: const Color.fromRGBO(24, 22, 27, 1),
-        child: ListView(
-          children: const [
-            MovieDetailsMainInfo(),
-            SizedBox(height: 20),
-            MovieDetailsScreenCast()
-          ],
-        ),
+      body: const ColoredBox(
+        color: Color.fromRGBO(24, 22, 27, 1),
+        child: _Body(),
       ),
     );
   }
+}
+
+class _Body extends StatelessWidget {
+  const _Body();
+
+  @override
+  Widget build(BuildContext context) {
+    final movieDetails =
+        NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
+    if (movieDetails == null){
+      return const Center(child: CircularProgressIndicator());
+    } else {
+    return ListView(
+      children: const [
+        MovieDetailsMainInfo(),
+        SizedBox(height: 20),
+        MovieDetailsScreenCast()
+      ],
+    );
+  }}
 }
 
 class _Title extends StatelessWidget {
