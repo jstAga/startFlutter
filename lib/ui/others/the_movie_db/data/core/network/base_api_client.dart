@@ -23,8 +23,7 @@ class BaseApiClient {
       final code = status is int ? status : 0; // int to string
       if (code == 30) {
         throw ApiClientException(ApiClientExceptionType.auth);
-      }
-      else {
+      } else {
         throw ApiClientException(ApiClientExceptionType.other);
       }
     }
@@ -69,7 +68,7 @@ class BaseApiClient {
       throw ApiClientException(ApiClientExceptionType.network);
     } on ApiClientException {
       rethrow;
-    } catch (_) {
+    } catch (e) {
       throw ApiClientException(ApiClientExceptionType.other);
     }
   }

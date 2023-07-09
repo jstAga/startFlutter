@@ -32,8 +32,10 @@ class AuthModel extends ChangeNotifier {
     _isAuthLoading = true;
     notifyListeners();
     String? sessionId;
+    int? accountId;
     try {
       sessionId = await _apiClient.auth(username: username, password: password);
+      accountId = await _apiClient.getAccountInfo(sessionId);
     } on ApiClientException catch (e) {
       switch (e.type) {
         case ApiClientExceptionType.network:
@@ -51,12 +53,13 @@ class AuthModel extends ChangeNotifier {
     if (errorMessage != null) {
       notifyListeners();
       return;
-    } else if (sessionId == null) {
+    } else if (sessionId == null || accountId == null) {
       _errorMessage == "Unknown error try again";
       notifyListeners();
       return;
     }
     await _sessionDataProvider.setSessionId(sessionId);
+    await _sessionDataProvider.setAccountId(accountId);
     Navigator.pushReplacementNamed(
         context, MainNavigationRoutesNames.homeMovieDb);
   }
