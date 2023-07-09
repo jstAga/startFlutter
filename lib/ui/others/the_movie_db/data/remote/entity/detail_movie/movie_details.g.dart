@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'detail_movie.dart';
+part of 'movie_details.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-DetailMovieEntity _$DetailMovieEntityFromJson(Map<String, dynamic> json) =>
-    DetailMovieEntity(
+MovieDetailsEntity _$MovieDetailsEntityFromJson(Map<String, dynamic> json) =>
+    MovieDetailsEntity(
       adult: json['adult'] as bool?,
       backdropPath: json['backdrop_path'] as String?,
       belongsToCollection: json['belongs_to_collection'] == null
@@ -32,10 +32,12 @@ DetailMovieEntity _$DetailMovieEntityFromJson(Map<String, dynamic> json) =>
       productionCountries: (json['production_countries'] as List<dynamic>?)
           ?.map((e) => ProductionCountries.fromJson(e as Map<String, dynamic>))
           .toList(),
-      releaseDate: DetailMovieEntity._parseDateFromString(
-          json['release_date'] as String?),
+      releaseDate: parseDateFromString(json['release_date'] as String?),
       revenue: json['revenue'] as num?,
       runtime: json['runtime'] as num?,
+      spokenLanguages: (json['spoken_languages'] as List<dynamic>?)
+          ?.map((e) => SpokenLanguages.fromJson(e as Map<String, dynamic>))
+          .toList(),
       status: json['status'] as String?,
       tagline: json['tagline'] as String?,
       title: json['title'] as String?,
@@ -44,7 +46,7 @@ DetailMovieEntity _$DetailMovieEntityFromJson(Map<String, dynamic> json) =>
       voteCount: json['vote_count'] as num?,
     );
 
-Map<String, dynamic> _$DetailMovieEntityToJson(DetailMovieEntity instance) =>
+Map<String, dynamic> _$MovieDetailsEntityToJson(MovieDetailsEntity instance) =>
     <String, dynamic>{
       'adult': instance.adult,
       'backdrop_path': instance.backdropPath,
@@ -66,6 +68,8 @@ Map<String, dynamic> _$DetailMovieEntityToJson(DetailMovieEntity instance) =>
       'release_date': instance.releaseDate?.toIso8601String(),
       'revenue': instance.revenue,
       'runtime': instance.runtime,
+      'spoken_languages':
+          instance.spokenLanguages?.map((e) => e.toJson()).toList(),
       'status': instance.status,
       'tagline': instance.tagline,
       'title': instance.title,
@@ -134,13 +138,13 @@ Map<String, dynamic> _$SpokenLanguagesToJson(SpokenLanguages instance) =>
 
 ProductionCountries _$ProductionCountriesFromJson(Map<String, dynamic> json) =>
     ProductionCountries(
-      iso: json['iso'] as String?,
+      iso: json['iso_3166_1'] as String?,
       name: json['name'] as String?,
     );
 
 Map<String, dynamic> _$ProductionCountriesToJson(
         ProductionCountries instance) =>
     <String, dynamic>{
-      'iso': instance.iso,
+      'iso_3166_1': instance.iso,
       'name': instance.name,
     };

@@ -14,7 +14,7 @@ class Movies extends StatefulWidget {
 class _MoviesState extends State<Movies> {
   @override
   Widget build(BuildContext context) {
-    final model = BaseNotifierProvider.watch<MoviesModel>(context);
+    final model = NotifierProvider.watch<MoviesModel>(context);
     if (model == null) return const SizedBox.shrink();
     return Stack(
       children: [

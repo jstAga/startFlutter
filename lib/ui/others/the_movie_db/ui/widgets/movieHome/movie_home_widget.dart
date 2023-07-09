@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/local/data_provider/session_data_provider.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases/base_providers.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/movie_db_constants.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieHome/movie_home_model.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movies/movies_model.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movies/movies_widget.dart';
 
@@ -31,6 +32,7 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
 
   @override
   Widget build(BuildContext context) {
+      final model = NotifierProvider.read<MovieHomeModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text(MovieDbConstants.theMovieDbHomeTitle),
@@ -53,7 +55,11 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
       body: IndexedStack(
         index: _selectedTab,
         children: [
-          BaseNotifierProvider(model: movieModel, child: const Movies()),
+          NotifierProvider(
+            create: () => movieModel,
+            isManagingModel: false,
+            child: const Movies(),
+          ),
           const Text("Home"),
           const Text("Tv shows")
         ],

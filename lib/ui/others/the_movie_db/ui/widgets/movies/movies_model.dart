@@ -52,6 +52,7 @@ class MoviesModel extends ChangeNotifier {
     try {
       final moviesResponse = await _getMovies(nextPage, _local);
       _movies.addAll(moviesResponse.results);
+      notifyListeners();
       _currentPage = moviesResponse.page;
       _totalPages = moviesResponse.totalPages!;
       _isLoading = false;
@@ -79,7 +80,6 @@ class MoviesModel extends ChangeNotifier {
   }
 
   void getCurrentMovieIndex(int index) {
-    print(_movies[index].id);
     if (index < _movies.length - 1) return;
     _getNextPage();
   }

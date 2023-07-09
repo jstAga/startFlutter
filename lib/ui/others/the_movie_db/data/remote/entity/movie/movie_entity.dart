@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:start_flutter/ui/others/the_movie_db/data/remote/entity/data_ext.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/remote/movie_db_constants.dart';
 
 part 'movie_entity.g.dart';
@@ -31,7 +32,7 @@ class MovieEntity {
   final String? overview;
   final double? popularity;
   final String? posterPath;
-  @JsonKey(fromJson: _parseDateFromString)
+  @JsonKey(fromJson: parseDateFromString)
   final DateTime? releaseDate;
   final String? title;
   final bool? video;
@@ -44,9 +45,4 @@ class MovieEntity {
       _$MovieEntityFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieEntityToJson(this);
-
-  static DateTime? _parseDateFromString(String? rawDate) {
-    if (rawDate == null || rawDate.isEmpty) return null;
-    return DateTime.tryParse(rawDate);
-  }
 }
