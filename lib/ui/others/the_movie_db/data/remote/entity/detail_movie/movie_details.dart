@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:start_flutter/ui/others/the_movie_db/data/remote/entity/data_ext.dart';
 
 part 'detail_movie.g.dart';
 
@@ -23,7 +24,7 @@ class DetailMovieEntity {
     this.releaseDate,
     this.revenue,
     this.runtime,
-    // this.spokenLanguages,
+    this.spokenLanguages,
     this.status,
     this.tagline,
     this.title,
@@ -47,11 +48,11 @@ class DetailMovieEntity {
   final String? posterPath;
   final List<ProductionCompanies>? productionCompanies;
   final List<ProductionCountries>? productionCountries;
-  @JsonKey(fromJson: _parseDateFromString)
+  @JsonKey(fromJson: parseDateFromString)
   final DateTime? releaseDate;
   final num? revenue;
   final num? runtime;
-  // final List<SpokenLanguages>? spokenLanguages;
+  final List<SpokenLanguages>? spokenLanguages;
   final String? status;
   final String? tagline;
   final String? title;
@@ -59,13 +60,13 @@ class DetailMovieEntity {
   final num? voteAverage;
   final num? voteCount;
 
-  static DateTime? _parseDateFromString(String? rawDate) {
-    if (rawDate == null || rawDate.isEmpty) return null;
-    return DateTime.tryParse(rawDate);
-  }
+  factory DetailMovieEntity.fromJson(Map<String, dynamic> json) =>
+      _$DetailMovieEntityFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DetailMovieEntityToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake,explicitToJson: true)
+@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class BelongsToCollection {
   BelongsToCollection({
     this.id,
@@ -78,9 +79,14 @@ class BelongsToCollection {
   final String? name;
   final String? posterPath;
   final String? backdropPath;
+
+  factory BelongsToCollection.fromJson(Map<String, dynamic> json) =>
+      _$BelongsToCollectionFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BelongsToCollectionToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake,explicitToJson: true)
+@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class Genres {
   Genres({
     this.id,
@@ -89,9 +95,13 @@ class Genres {
 
   final num? id;
   final String? name;
+
+  factory Genres.fromJson(Map<String, dynamic> json) => _$GenresFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GenresToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake,explicitToJson: true)
+@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class ProductionCompanies {
   ProductionCompanies({
     this.id,
@@ -104,9 +114,14 @@ class ProductionCompanies {
   final String? logoPath;
   final String? name;
   final String? originCountry;
+
+  factory ProductionCompanies.fromJson(Map<String, dynamic> json) =>
+      _$ProductionCompaniesFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProductionCompaniesToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake,explicitToJson: true)
+@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class SpokenLanguages {
   SpokenLanguages({
     this.englishName,
@@ -118,15 +133,26 @@ class SpokenLanguages {
   @JsonKey(name: "iso_639_1")
   final String? iso;
   final String? name;
+
+  factory SpokenLanguages.fromJson(Map<String, dynamic> json) =>
+      _$SpokenLanguagesFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SpokenLanguagesToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake,explicitToJson: true)
+@JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class ProductionCountries {
   ProductionCountries({
-    @JsonKey(name: "iso_3166_1") this.iso,
+    this.iso,
     this.name,
   });
 
+  @JsonKey(name: "iso_3166_1")
   final String? iso;
   final String? name;
+
+  factory ProductionCountries.fromJson(Map<String, dynamic> json) =>
+      _$ProductionCountriesFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProductionCountriesToJson(this);
 }
