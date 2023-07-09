@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/resources/resources.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases/base_providers.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases_ext.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieDetail/movie_details_model.dart';

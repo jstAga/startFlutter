@@ -147,17 +147,19 @@ class _Overview extends StatelessWidget {
 class _TopPoster extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final model =
-        NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
-    final backdropPath = model?.backdrop;
-    final posterPath = model?.poster;
+    final model = NotifierProvider.watch<MovieDetailsModel>(context);
+    final backdropPath = model?.movieDetails?.backdrop;
+    final posterPath = model?.movieDetails?.poster;
+    final saveIcon = model!.isMovieSaved == true
+        ? const Icon(Icons.bookmark, color: Colors.yellow)
+        : const Icon(Icons.bookmark_add, color: Colors.white);
 
     return AspectRatio(
       aspectRatio: 390 / 219,
       child: Stack(
         children: [
           backdropPath != null
-              ? Image.network(model!.backdrop,
+              ? Image.network(backdropPath,
                   width: double.infinity, fit: BoxFit.fitWidth)
               : const SizedBox.shrink(),
           Positioned(
@@ -165,7 +167,14 @@ class _TopPoster extends StatelessWidget {
             left: 20,
             bottom: 20,
             child: Image.network(posterPath),
-          )
+          ),
+          Positioned(
+              top: 20,
+              right: 5,
+              child: IconButton(
+                icon: saveIcon,
+                onPressed: () => model.toggleSave(),
+              ))
         ],
       ),
     );

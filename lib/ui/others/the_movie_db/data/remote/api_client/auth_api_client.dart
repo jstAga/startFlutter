@@ -41,17 +41,14 @@ class AuthApiClient {
       return token;
     }
 
-    final bodyParameters = <String, dynamic>{
+    final result = _baseApiClient.post(
+        MovieDbConstants.postValidateUser, parser, <String, dynamic>{
       "username": username,
       "password": password,
       "request_token": requestToken
-    };
-
-    final result = _baseApiClient.post(
-        MovieDbConstants.postValidateUser,
-        parser,
-        bodyParameters,
-        <String, dynamic>{"api_key": MovieDbConstants.apiKey});
+    }, <String, dynamic>{
+      "api_key": MovieDbConstants.apiKey
+    });
     return result;
   }
 
@@ -62,10 +59,26 @@ class AuthApiClient {
       return sessionId;
     }
 
-    final bodyParameters = <String, dynamic>{"request_token": requestToken};
+    final result = _baseApiClient.post(
+        MovieDbConstants.postSession,
+        parser,
+        <String, dynamic>{"request_token": requestToken},
+        <String, dynamic>{"api_key": MovieDbConstants.apiKey});
+    return result;
+  }
 
-    final result = _baseApiClient.post(MovieDbConstants.postSession, parser,
-        bodyParameters, <String, dynamic>{"api_key": MovieDbConstants.apiKey});
+  int _getAccountInfo(dynamic json) {
+    final jsonMap = json as Map<String, dynamic>;
+    final result = jsonMap["id"] as int;
+    return result;
+  }
+
+  Future<int> getAccountInfo(String sessionId) {
+    final result = _baseApiClient
+        .get(MovieDbConstants.accountInfo, _getAccountInfo, <String, dynamic>{
+      "api_key": MovieDbConstants.apiKey,
+      "session_id": sessionId,
+    });
     return result;
   }
 }
