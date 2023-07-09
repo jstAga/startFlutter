@@ -54,9 +54,8 @@ class MainNavigation {
     MainNavigationRoutesNames.telegramSettings: (context) => TelegramSettings(),
     //movieDb
     MainNavigationRoutesNames.authMovieDb: (context) =>
-        BaseNotifierProvider(
-            create: () => AuthModel(), child: const AuthWidget()),
-    MainNavigationRoutesNames.homeMovieDb: (context) => BaseNotifierProvider(
+        NotifierProvider(create: () => AuthModel(), child: const AuthWidget()),
+    MainNavigationRoutesNames.homeMovieDb: (context) => NotifierProvider(
         create: () => MovieHomeModel(), child: const MovieHomeWidget()),
     //love calculator
     MainNavigationRoutesNames.loveCalculator: (context) =>
@@ -78,7 +77,7 @@ class MainNavigation {
         final args = settings.arguments;
         final movieId = args is int ? args : 0;
         return MaterialPageRoute(builder: (context) {
-          return BaseNotifierProvider(
+          return NotifierProvider(
               create: () => MovieDetailsModel(movieId: movieId),
               child: const MovieDetailsWidget());
         });

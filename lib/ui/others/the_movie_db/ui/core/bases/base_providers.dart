@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 
-class BaseNotifierProvider<Model extends ChangeNotifier>
+class NotifierProvider<Model extends ChangeNotifier>
     extends StatefulWidget {
-  const BaseNotifierProvider(
+  const NotifierProvider(
       {super.key,
       required this.create,
       required this.child,
@@ -13,25 +13,25 @@ class BaseNotifierProvider<Model extends ChangeNotifier>
   final Widget child;
 
   @override
-  _BaseNotifierProviderState<Model> createState() =>
-      _BaseNotifierProviderState<Model>();
+  _NotifierProviderState<Model> createState() =>
+      _NotifierProviderState<Model>();
 
   static Model? watch<Model extends ChangeNotifier>(BuildContext context) {
     return context
-        .dependOnInheritedWidgetOfExactType<BaseInheritedNotifierProvider<Model>>()
+        .dependOnInheritedWidgetOfExactType<_InheritedNotifierProvider<Model>>()
         ?.model;
   }
 
   static Model? read<Model extends ChangeNotifier>(BuildContext context) {
     final widget = context
-        .getElementForInheritedWidgetOfExactType<BaseInheritedNotifierProvider<Model>>()
+        .getElementForInheritedWidgetOfExactType<_InheritedNotifierProvider<Model>>()
         ?.widget;
-    return widget is BaseInheritedNotifierProvider<Model> ? widget.model : null;
+    return widget is _InheritedNotifierProvider<Model> ? widget.model : null;
   }
 }
 
-class _BaseNotifierProviderState<Model extends ChangeNotifier>
-    extends State<BaseNotifierProvider<Model>> {
+class _NotifierProviderState<Model extends ChangeNotifier>
+    extends State<NotifierProvider<Model>> {
   late final Model _model;
 
   @override
@@ -50,12 +50,23 @@ class _BaseNotifierProviderState<Model extends ChangeNotifier>
 
   @override
   Widget build(BuildContext context) {
-    return BaseInheritedNotifierProvider(model: _model, child: widget.child);
+    return _InheritedNotifierProvider(model: _model, child: widget.child);
   }
 }
 
-class BaseInheritedProvider<Model> extends InheritedWidget {
-  const BaseInheritedProvider({
+class _InheritedNotifierProvider<Model extends ChangeNotifier>
+    extends InheritedNotifier {
+  const _InheritedNotifierProvider({
+    super.key,
+    required this.model,
+    required Widget child,
+  }) : super(notifier: model, child: child);
+
+  final Model model;
+}
+
+class InheritedProvider<Model> extends InheritedWidget {
+  const InheritedProvider({
     super.key,
     required this.model,
     required Widget child,
@@ -65,43 +76,19 @@ class BaseInheritedProvider<Model> extends InheritedWidget {
 
   static Model? watch<Model>(BuildContext context) {
     return context
-        .dependOnInheritedWidgetOfExactType<BaseInheritedProvider<Model>>()
+        .dependOnInheritedWidgetOfExactType<InheritedProvider<Model>>()
         ?.model;
   }
 
   static Model? read<Model>(BuildContext context) {
     final widget = context
-        .getElementForInheritedWidgetOfExactType<BaseInheritedProvider<Model>>()
+        .getElementForInheritedWidgetOfExactType<InheritedProvider<Model>>()
         ?.widget;
-    return widget is BaseInheritedProvider<Model> ? widget.model : null;
+    return widget is InheritedProvider<Model> ? widget.model : null;
   }
 
   @override
-  bool updateShouldNotify(BaseInheritedProvider oldWidget) {
+  bool updateShouldNotify(InheritedProvider oldWidget) {
     return model != oldWidget.model;
-  }
-}
-
-class BaseInheritedNotifierProvider<Model extends ChangeNotifier>
-    extends InheritedNotifier {
-  const BaseInheritedNotifierProvider({
-    super.key,
-    required this.model,
-    required Widget child,
-  }) : super(notifier: model, child: child);
-
-  final Model model;
-
-  static Model? watch<Model extends ChangeNotifier>(BuildContext context) {
-    return context
-        .dependOnInheritedWidgetOfExactType<BaseInheritedNotifierProvider<Model>>()
-        ?.model;
-  }
-
-  static Model? read<Model extends ChangeNotifier>(BuildContext context) {
-    final widget = context
-        .getElementForInheritedWidgetOfExactType<BaseInheritedNotifierProvider<Model>>()
-        ?.widget;
-    return widget is BaseInheritedNotifierProvider<Model> ? widget.model : null;
   }
 }

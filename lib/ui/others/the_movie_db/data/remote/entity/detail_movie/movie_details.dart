@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/remote/entity/data_ext.dart';
+import 'package:start_flutter/ui/others/the_movie_db/data/remote/movie_db_constants.dart';
 
 part 'movie_details.g.dart';
 
@@ -60,10 +61,40 @@ class MovieDetailsEntity {
   final num? voteAverage;
   final num? voteCount;
 
+  get allGenres {
+    String result = "";
+    if (genres == null) result = "No genres";
+
+    for (int i = 0; i < genres!.length; i++) {
+      if (genres!.length - 1 != i) {
+        result += "${genres![i].name}, ";
+      } else {
+        result += "${genres![i].name}";
+      }
+    }
+    return result;
+  }
+
+  get allCountries {
+    String result = "";
+    if (productionCountries == null) result = "No countries";
+
+    for (int i = 0; i < productionCountries!.length; i++) {
+      if (productionCountries!.length - 1 != i) {
+        result += "${productionCountries![i].iso}, ";
+      } else {
+        result += "${productionCountries![i].iso}";
+      }
+    }
+    return result;
+  }
+
   factory MovieDetailsEntity.fromJson(Map<String, dynamic> json) =>
       _$MovieDetailsEntityFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieDetailsEntityToJson(this);
+
+  get image => MovieDbConstants.baseImage + (posterPath ?? "");
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)

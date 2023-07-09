@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases/base_providers.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases_ext.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieDetail/movie_details_model.dart';
 
 class MovieDetailsMainInfo extends StatelessWidget {
-
-  // const MovieDetailMainInfo({Key? key, required this.movieModel})
-  //     : super(key: key);
+  const MovieDetailsMainInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      // _TopPosters(
-      //   imageName: movieModel.imageName,
-      // ),
-      // Padding(
-      //     padding: const EdgeInsets.all(20),
-      //     child: _MovieName(year: " (2022)", title: movieModel.title)),
+      _TopPoster(),
+      Padding(
+          padding: const EdgeInsets.all(20),
+          child: _MovieName()),
       const _Score(),
-      const _MovieInfo(),
+      _MovieInfo(),
       const _Overview(),
-      // _Description(movieModel: movieModel),
-      const _ActorsInfo()
+      const _Description(),
+      _ActorsInfo()
     ]);
   }
 }
@@ -109,15 +107,15 @@ class _ActorsInfo extends StatelessWidget {
 class _Description extends StatelessWidget {
   const _Description();
 
-
-  // @override
+  @override
   Widget build(BuildContext context) {
-    // return Padding(
-    //   padding: const EdgeInsets.all(8),
-    //   child: Text(movieModel.description,
-    //       style: BaseTextStyle.baseSimilarText(Colors.white)),
-    // );
-    return SizedBox.shrink();
+    final model =
+        NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Text(model?.overview ?? "",
+          style: BaseTextStyle.baseSimilarText(Colors.white)),
+    );
   }
 }
 
@@ -135,47 +133,39 @@ class _Overview extends StatelessWidget {
   }
 }
 
-class _TopPosters extends StatelessWidget {
-  final String imageName;
-
-  const _TopPosters({Key? key, required this.imageName}) : super(key: key);
-
+class _TopPoster extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final imageUrl =
+        NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails?.image;
+
     return Stack(
       children: [
-        Image(
-            height: 250,
+        Image.network(
+            imageUrl ??
+                "https://w0.peakpx.com/wallpaper/200/532/HD-wallpaper-black-plain-thumbnail.jpg",
             width: double.infinity,
-            image: AssetImage(imageName),
             fit: BoxFit.fitWidth),
-        Positioned(
-            top: 16,
-            left: 12,
-            child: Image(image: AssetImage(imageName), width: 150, height: 200))
       ],
     );
   }
 }
 
 class _MovieName extends StatelessWidget {
-  const _MovieName({Key? key, required this.year, required this.title})
-      : super(key: key);
-
-  final String year;
-  final String title;
 
   @override
   Widget build(BuildContext context) {
+    final model =
+        NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
     return RichText(
       textAlign: TextAlign.center,
       maxLines: 3,
       text: TextSpan(
         children: <TextSpan>[
           TextSpan(
-              text: title, style: BaseTextStyle.baseTitleText(Colors.white)),
+              text: model?.title, style: BaseTextStyle.baseTitleText(Colors.white)),
           TextSpan(
-            text: year,
+            text: "(${model?.releaseDate?.year.toString()})",
             style: BaseTextStyle.baseTitleText(Colors.white),
           )
         ],
@@ -189,12 +179,14 @@ class _MovieInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model =
+        NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
     return ColoredBox(
       color: const Color.fromRGBO(22, 21, 25, 1.0),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 60),
         child: Text(
-          "R 24/03/2023 (US) 2h 50m Action,Thriller,Crime",
+          "(${model?.allCountries}) ${model?.allGenres}",
           textAlign: TextAlign.center,
           maxLines: 3,
           style: BaseTextStyle.baseSimilarText(Colors.white),

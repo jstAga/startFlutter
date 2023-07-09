@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/remote/api_client/movies_api_client.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/remote/entity/detail_movie/movie_details.dart';
@@ -9,7 +9,7 @@ class MovieDetailsModel extends ChangeNotifier {
   final _apiClient = MoviesApiClient();
   final int movieId;
   MovieDetailsEntity? _movieDetails;
-  late String _local;
+  String _local = "ru-Ru";
   late DateFormat _date;
 
   MovieDetailsEntity? get movieDetails => _movieDetails;

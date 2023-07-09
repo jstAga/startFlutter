@@ -45,10 +45,9 @@ class MoviesApiClient {
   }
 
   Future<MovieDetailsEntity> getDetails(int id, String language) {
-    final result = _baseApiClient.get(
-        "${MovieDbConstants.movieDetails}$id", _movieDetailsParser, <String, dynamic>{
+    final result = _baseApiClient.get("${MovieDbConstants.movieDetails}$id?",
+        _movieDetailsParser, <String, dynamic>{
       "api_key": MovieDbConstants.apiKey,
-      "movie_id": id,
       "language": language,
     });
     return result;
