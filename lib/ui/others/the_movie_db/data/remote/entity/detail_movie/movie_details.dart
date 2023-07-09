@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:start_flutter/ui/others/the_movie_db/data/remote/entity/credits/credits_entity.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/remote/entity/data_ext.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/remote/movie_db_constants.dart';
 
@@ -6,33 +8,33 @@ part 'movie_details.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class MovieDetailsEntity {
-  MovieDetailsEntity({
-    this.adult,
-    this.backdropPath,
-    this.belongsToCollection,
-    this.budget,
-    this.genres,
-    this.homepage,
-    this.id,
-    this.imdbId,
-    this.originalLanguage,
-    this.originalTitle,
-    this.overview,
-    this.popularity,
-    this.posterPath,
-    this.productionCompanies,
-    this.productionCountries,
-    this.releaseDate,
-    this.revenue,
-    this.runtime,
-    this.spokenLanguages,
-    this.status,
-    this.tagline,
-    this.title,
-    this.video,
-    this.voteAverage,
-    this.voteCount,
-  });
+  MovieDetailsEntity(
+      {this.adult,
+      this.backdropPath,
+      this.belongsToCollection,
+      this.budget,
+      this.genres,
+      this.homepage,
+      this.id,
+      this.imdbId,
+      this.originalLanguage,
+      this.originalTitle,
+      this.overview,
+      this.popularity,
+      this.posterPath,
+      this.productionCompanies,
+      this.productionCountries,
+      this.releaseDate,
+      this.revenue,
+      this.runtime,
+      this.spokenLanguages,
+      this.status,
+      this.tagline,
+      this.title,
+      this.video,
+      this.voteAverage,
+      this.voteCount,
+      this.credits});
 
   final bool? adult;
   final String? backdropPath;
@@ -60,8 +62,20 @@ class MovieDetailsEntity {
   final bool? video;
   final num? voteAverage;
   final num? voteCount;
+  final CreditsEntity? credits;
 
-  get allGenres {
+  get allInfo {
+    return "($_allCountries) $_duration, $_allGenres";
+  }
+
+  get _duration {
+    if (runtime != null) {
+      final duration = Duration(minutes: runtime!.toInt());
+      return "${duration.inHours}h ${duration.inMinutes.remainder(60)}min";
+    }
+  }
+
+  get _allGenres {
     String result = "";
     if (genres == null) result = "No genres";
 
@@ -75,7 +89,19 @@ class MovieDetailsEntity {
     return result;
   }
 
-  get allCountries {
+  get crewChunks {
+    var crew = credits?.crew;
+    if (crew == null || crew.isEmpty) return const SizedBox.shrink();
+    crew = crew.length > 4 ? crew.sublist(0, 3) : crew;
+    var crewChunks = <List<Crew>>[];
+    for (var i = 0; i < crew.length; i++) {
+      crewChunks
+          .add(crew.sublist(i, i + 2 > crew.length ? crew.length : i + 2));
+    }
+    return crewChunks;
+  }
+
+  get _allCountries {
     String result = "";
     if (productionCountries == null) result = "No countries";
 
@@ -94,7 +120,9 @@ class MovieDetailsEntity {
 
   Map<String, dynamic> toJson() => _$MovieDetailsEntityToJson(this);
 
-  get image => MovieDbConstants.baseImage + (posterPath ?? "");
+  get poster => MovieDbConstants.baseImage + (posterPath ?? "");
+
+  get backdrop => MovieDbConstants.baseImage + (backdropPath ?? "");
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)

@@ -49,6 +49,7 @@ class MoviesApiClient {
         _movieDetailsParser, <String, dynamic>{
       "api_key": MovieDbConstants.apiKey,
       "language": language,
+      "append_to_response": "credits"
     });
     return result;
   }
