@@ -47,6 +47,9 @@ MovieDetailsEntity _$MovieDetailsEntityFromJson(Map<String, dynamic> json) =>
       credits: json['credits'] == null
           ? null
           : CreditsEntity.fromJson(json['credits'] as Map<String, dynamic>),
+      videos: json['videos'] == null
+          ? null
+          : TrailerResponse.fromJson(json['videos'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$MovieDetailsEntityToJson(MovieDetailsEntity instance) =>
@@ -80,6 +83,7 @@ Map<String, dynamic> _$MovieDetailsEntityToJson(MovieDetailsEntity instance) =>
       'vote_average': instance.voteAverage,
       'vote_count': instance.voteCount,
       'credits': instance.credits?.toJson(),
+      'videos': instance.videos?.toJson(),
     };
 
 BelongsToCollection _$BelongsToCollectionFromJson(Map<String, dynamic> json) =>

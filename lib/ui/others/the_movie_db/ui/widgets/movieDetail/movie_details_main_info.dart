@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:start_flutter/ui/main_navigation/main_navigation.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/remote/entity/credits/credits_entity.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases/base_providers.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases_ext.dart';
@@ -26,10 +27,13 @@ class _Score extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final voteAverage = NotifierProvider.watch<MovieDetailsModel>(context)
-            ?.movieDetails
-            ?.voteAverage ??
-        0;
+    final movieDetails =
+        NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
+    final voteAverage = movieDetails?.voteAverage ?? 0;
+    final videos = movieDetails?.videos?.results
+        .where((video) => video.type == "Trailer" && video.site == "YouTube");
+    final trailerKey = videos?.isNotEmpty == true ? videos?.first.key : null;
+
     final score = (voteAverage * 10).round() / 10;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -39,10 +43,14 @@ class _Score extends StatelessWidget {
             child: Text("$score / 10 User Score",
                 style: BaseTextStyle.baseSimilarBoldText(Colors.lightBlue))),
         Container(width: 1, height: 15, color: Colors.white),
-        TextButton(
-            onPressed: () {},
-            child: Text("Play Trailer",
-                style: BaseTextStyle.baseSimilarBoldText(Colors.lightBlue)))
+        trailerKey != null
+            ? TextButton(
+                onPressed: () => Navigator.pushNamed(
+                    context, MainNavigationRoutesNames.movieTrailer,
+                    arguments: trailerKey),
+                child: Text("Play Trailer",
+                    style: BaseTextStyle.baseSimilarBoldText(Colors.lightBlue)))
+            : const SizedBox.shrink()
       ],
     );
   }

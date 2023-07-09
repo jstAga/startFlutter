@@ -84,27 +84,25 @@ class _CastItem extends StatelessWidget {
           child: ClipRRect(
             clipBehavior: Clip.hardEdge,
             borderRadius: BorderRadius.circular(12),
-            child: Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image.network(
-                    cast.profileImage,
-                    fit: BoxFit.fitWidth,
-                    width: 120,
-                    height: 120,
-                  ),
-                  Text(cast.name ?? "",
-                      maxLines: 2,
-                      textAlign: TextAlign.start,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w500, color: Colors.black)),
-                  Text(cast.character ?? "",
-                      maxLines: 2,
-                      textAlign: TextAlign.start,
-                      style: const TextStyle(color: Colors.black))
-                ],
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image.network(
+                  cast.profileImage,
+                  fit: BoxFit.fitWidth,
+                  width: 120,
+                  height: 120,
+                ),
+                Text(cast.name ?? "",
+                    maxLines: 2,
+                    textAlign: TextAlign.start,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w500, color: Colors.black)),
+                Text(cast.character ?? "",
+                    maxLines: 2,
+                    textAlign: TextAlign.start,
+                    style: const TextStyle(color: Colors.black))
+              ],
             ),
           ),
         ));
