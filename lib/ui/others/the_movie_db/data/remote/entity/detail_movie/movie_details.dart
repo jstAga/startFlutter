@@ -1,11 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/remote/entity/data_ext.dart';
 
-part 'detail_movie.g.dart';
+part 'movie_details.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-class DetailMovieEntity {
-  DetailMovieEntity({
+class MovieDetailsEntity {
+  MovieDetailsEntity({
     this.adult,
     this.backdropPath,
     this.belongsToCollection,
@@ -60,10 +60,10 @@ class DetailMovieEntity {
   final num? voteAverage;
   final num? voteCount;
 
-  factory DetailMovieEntity.fromJson(Map<String, dynamic> json) =>
-      _$DetailMovieEntityFromJson(json);
+  factory MovieDetailsEntity.fromJson(Map<String, dynamic> json) =>
+      _$MovieDetailsEntityFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DetailMovieEntityToJson(this);
+  Map<String, dynamic> toJson() => _$MovieDetailsEntityToJson(this);
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)

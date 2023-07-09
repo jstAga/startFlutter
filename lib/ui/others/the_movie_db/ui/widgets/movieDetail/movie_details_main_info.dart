@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases_ext.dart';
 
-class MovieDetailMainInfo extends StatelessWidget {
+class MovieDetailsMainInfo extends StatelessWidget {
 
   // const MovieDetailMainInfo({Key? key, required this.movieModel})
   //     : super(key: key);

@@ -9,4 +9,5 @@ class MovieDbConstants {
 
   static const getMovies = "/movie/popular";
   static const searchMovie = "/search/movie";
+  static const movieDetails = "/movie/";
 }

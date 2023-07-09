@@ -53,7 +53,11 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
       body: IndexedStack(
         index: _selectedTab,
         children: [
-          BaseNotifierProvider(model: movieModel, child: const Movies()),
+          BaseNotifierProvider(
+            create: () => movieModel,
+            isManagingModel: false,
+            child: const Movies(),
+          ),
           const Text("Home"),
           const Text("Tv shows")
         ],
