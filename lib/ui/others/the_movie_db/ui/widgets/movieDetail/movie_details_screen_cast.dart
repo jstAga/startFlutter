@@ -42,8 +42,6 @@ class _CastList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = NotifierProvider.watch<MovieDetailsModel>(context);
-    final cast = model!.movieDetails!.credits!.cast;
     return ListView.builder(
         itemCount: 20,
         itemExtent: 120,

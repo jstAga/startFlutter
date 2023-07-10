@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:start_flutter/ui/others/the_movie_db/data/core/network/api_client_exception.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/local/data_provider/session_data_provider.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/remote/api_client/movies_api_client.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/remote/entity/detail_movie/movie_details.dart';
@@ -14,7 +14,7 @@ class MovieDetailsModel extends ChangeNotifier {
   MovieDetailsEntity? _movieDetails;
   String _local = "ru-Ru";
   bool _isMovieSaved = false;
-  late DateFormat _date;
+  Future<void>? Function()? onSessionExpired;
 
   MovieDetailsEntity? get movieDetails => _movieDetails;
 
@@ -24,17 +24,20 @@ class MovieDetailsModel extends ChangeNotifier {
     final local = Localizations.localeOf(context).toLanguageTag();
     if (_local == local) return;
     _local = local;
-    _date = DateFormat.yMMMd(local);
     await _getDetails();
   }
 
   Future<void> _getDetails() async {
-    _movieDetails = await _apiClient.getDetails(movieId, _local);
-    final sessionId = await _sessionDataProvider.getSessionId();
-    if (sessionId != null) {
-      _isMovieSaved = await _apiClient.isMovieSaved(movieId, sessionId);
+    try {
+      _movieDetails = await _apiClient.getDetails(movieId, _local);
+      final sessionId = await _sessionDataProvider.getSessionId();
+      if (sessionId != null) {
+        _isMovieSaved = await _apiClient.isMovieSaved(movieId, sessionId);
+      }
+      notifyListeners();
+    } on ApiClientException catch (e) {
+      _handleApiClientException(e);
     }
-    notifyListeners();
   }
 
   Future<void> toggleSave() async {
@@ -45,11 +48,27 @@ class MovieDetailsModel extends ChangeNotifier {
     final isMovieSavedUpdated = !_isMovieSaved;
     _isMovieSaved = isMovieSavedUpdated;
     notifyListeners();
-    await _apiClient.saveMovie(
-        accountId: accountId,
-        sessionId: sessionId,
-        mediaType: MediaType.movie,
-        mediaId: movieId,
-        isSaved: isMovieSavedUpdated);
+
+    try {
+      await _apiClient.saveMovie(
+          accountId: accountId,
+          sessionId: sessionId,
+          mediaType: MediaType.movie,
+          mediaId: movieId,
+          isSaved: isMovieSavedUpdated);
+    } on ApiClientException catch (e) {
+      _handleApiClientException(e);
+    }
+  }
+
+  void _handleApiClientException(ApiClientException e) {
+    switch (e.type) {
+      case ApiClientExceptionType.sessionExpired:
+        onSessionExpired?.call();
+        break;
+      default:
+        print(e);
+        break;
+    }
   }
 }

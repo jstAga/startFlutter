@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:start_flutter/app/app.dart';
 import 'package:start_flutter/app/app_model.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases/base_providers.dart';
 import 'package:start_flutter/ui/others/work_with_hive/data/entity/pet/pet.dart';
 import 'package:start_flutter/ui/others/work_with_hive/data/entity/user/user.dart';
 
@@ -14,6 +15,7 @@ void main() async {
   // movieDb check user is auth
   final model = AppModel();
   await model.checkAuth();
-  final app = App(model: model);
-  runApp(app);
+  const app = App();
+  final widget = InheritedProvider(model: model, child: app);
+  runApp(widget);
 }

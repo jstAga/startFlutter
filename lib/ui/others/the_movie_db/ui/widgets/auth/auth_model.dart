@@ -47,6 +47,9 @@ class AuthModel extends ChangeNotifier {
         case ApiClientExceptionType.other:
           _errorMessage = "Unknown error try again";
           break;
+        default:
+          print(e);
+          break;
       }
     }
     _isAuthLoading = false;
