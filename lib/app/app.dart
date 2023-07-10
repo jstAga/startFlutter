@@ -3,20 +3,21 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:start_flutter/app/app_model.dart';
 
 import 'package:start_flutter/ui/main_navigation/main_navigation.dart';
+import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases/base_providers.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/movie_db_constants.dart';
 
 class App extends StatelessWidget {
-  const App({super.key, required this.model});
+  const App({super.key});
 
-  final AppModel model;
   static final _mainNavigation = MainNavigation();
 
   @override
   Widget build(BuildContext context) {
+    final model = InheritedProvider.read<AppModel>(context);
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      initialRoute: _mainNavigation.initialRoute2(model.isAuth),
+      initialRoute: _mainNavigation.initialRoute2(model?.isAuth == true),
       routes: _mainNavigation.routes,
       onGenerateRoute: _mainNavigation.onGenerateRoute,
       localizationsDelegates: const [

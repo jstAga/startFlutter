@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:start_flutter/app/app_model.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases/base_providers.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieDetail/movie_details_main_info.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieDetail/movie_details_model.dart';
@@ -12,6 +13,14 @@ class MovieDetailsWidget extends StatefulWidget {
 }
 
 class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
+  @override
+  void initState() {
+    super.initState();
+    final model = NotifierProvider.read<MovieDetailsModel>(context);
+    final appModel = InheritedProvider.read<AppModel>(context);
+    model?.onSessionExpired = () => appModel?.resetSession(context);
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -40,17 +49,18 @@ class _Body extends StatelessWidget {
   Widget build(BuildContext context) {
     final movieDetails =
         NotifierProvider.watch<MovieDetailsModel>(context)?.movieDetails;
-    if (movieDetails == null){
+    if (movieDetails == null) {
       return const Center(child: CircularProgressIndicator());
     } else {
-    return ListView(
-      children: const [
-        MovieDetailsMainInfo(),
-        SizedBox(height: 20),
-        MovieDetailsScreenCast()
-      ],
-    );
-  }}
+      return ListView(
+        children: const [
+          MovieDetailsMainInfo(),
+          SizedBox(height: 20),
+          MovieDetailsScreenCast()
+        ],
+      );
+    }
+  }
 }
 
 class _Title extends StatelessWidget {
