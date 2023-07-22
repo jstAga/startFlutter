@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:start_flutter/ui/geek_tech/2month/hw6m2/hw6m2.dart';
 import 'package:start_flutter/ui/geek_tech/2month/hw7m2/hw7m2.dart';
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/data/remote/entity/love_response.dart';
@@ -17,6 +18,9 @@ import 'package:start_flutter/ui/others/todo_list/ui/group_form/group_form_widge
 import 'package:start_flutter/ui/others/todo_list/ui/groups/groups_widget.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/task_from/task_form_widget.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/tasks/tasks_widget.dart';
+import 'package:start_flutter/ui/others/mvvm_counter/ui/mvvm_counter/mvvm_counter_view_model.dart';
+import 'package:start_flutter/ui/others/mvvm_counter/ui/mvvm_counter/mvvm_counter_widget.dart';
+import 'package:start_flutter/ui/others/work_with_hive/ui/work_with_hive_widget.dart';
 
 abstract class MainNavigationRoutesNames {
   //geekTech
@@ -40,10 +44,14 @@ abstract class MainNavigationRoutesNames {
   static const groupForm = "todoList/groupForm";
   static const tasks = "todoList/tasks";
   static const taskForm = "todoList/tasks/taskForm";
+
+  static const workWithHttp = "workWithHttp";
+  static const mvvmCounter = "mvvmCounter";
 }
 
 class MainNavigation {
   // final initialRoute = MainNavigationRoutesNames.authMovieDb;
+  final initialRoute = MainNavigationRoutesNames.mvvmCounter;
 
   String initialRoute2(bool isAuth) => isAuth //movieDb
       ? MainNavigationRoutesNames.homeMovieDb
@@ -54,11 +62,13 @@ class MainNavigation {
     MainNavigationRoutesNames.hw6m2: (context) => const Hw6m2(),
     MainNavigationRoutesNames.hw7m2: (context) => const Hw7m2(),
     MainNavigationRoutesNames.telegramSettings: (context) => TelegramSettings(),
+
     //movieDb
     MainNavigationRoutesNames.authMovieDb: (context) =>
         NotifierProvider(create: () => AuthModel(), child: const AuthWidget()),
     MainNavigationRoutesNames.homeMovieDb: (context) => NotifierProvider(
         create: () => MovieHomeModel(), child: const MovieHomeWidget()),
+
     //love calculator
     MainNavigationRoutesNames.loveCalculator: (context) =>
         const LoveHomeWidget(),
@@ -67,9 +77,17 @@ class MainNavigation {
           ModalRoute.of(context)?.settings.arguments as LoveResponse;
       return LoveResultWidget(response: argument);
     },
+
     //todoList
     MainNavigationRoutesNames.groups: (context) => const GroupsWidget(),
     MainNavigationRoutesNames.groupForm: (context) => const GroupFormWidget(),
+
+    //workWithHttp
+    MainNavigationRoutesNames.workWithHttp: (context) =>
+        const WorkWithHiveWidget(),
+    //workWithHttp
+    MainNavigationRoutesNames.mvvmCounter: (context) => ChangeNotifierProvider(
+        create: (_) => MvvmCounterViewModel(), child: MvvmCounterWidget()),
   };
 
   Route<Object>? onGenerateRoute(RouteSettings settings) {
@@ -86,8 +104,10 @@ class MainNavigation {
       case MainNavigationRoutesNames.movieTrailer:
         return MaterialPageRoute(builder: (context) {
           final args = settings.arguments;
-          final trailerKey = args is String? args : "";
-          return MovieTrailerWidget(trailerKey: trailerKey,);
+          final trailerKey = args is String ? args : "";
+          return MovieTrailerWidget(
+            trailerKey: trailerKey,
+          );
         });
       //love calculator
       case MainNavigationRoutesNames.loveCalculatorResult:
