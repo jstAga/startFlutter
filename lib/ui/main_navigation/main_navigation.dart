@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:start_flutter/ui/geek_tech/2month/hw6m2/hw6m2.dart';
 import 'package:start_flutter/ui/geek_tech/2month/hw7m2/hw7m2.dart';
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/data/remote/entity/love_response.dart';
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/ui/widgets/home/love_home_widget.dart';
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/ui/widgets/result/love_result_widget.dart';
+import 'package:start_flutter/ui/others/mvvm_counter/ui/screens/mvvm_counter_auth/mvvm_counter_auth_widget.dart';
 import 'package:start_flutter/ui/others/telegram_settings/telegram_settings.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases/base_providers.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/auth/auth_model.dart';
@@ -18,8 +18,6 @@ import 'package:start_flutter/ui/others/todo_list/ui/group_form/group_form_widge
 import 'package:start_flutter/ui/others/todo_list/ui/groups/groups_widget.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/task_from/task_form_widget.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/tasks/tasks_widget.dart';
-import 'package:start_flutter/ui/others/mvvm_counter/ui/mvvm_counter/mvvm_counter_view_model.dart';
-import 'package:start_flutter/ui/others/mvvm_counter/ui/mvvm_counter/mvvm_counter_widget.dart';
 import 'package:start_flutter/ui/others/work_with_hive/ui/work_with_hive_widget.dart';
 
 abstract class MainNavigationRoutesNames {
@@ -86,8 +84,7 @@ class MainNavigation {
     MainNavigationRoutesNames.workWithHttp: (context) =>
         const WorkWithHiveWidget(),
     //workWithHttp
-    MainNavigationRoutesNames.mvvmCounter: (context) => ChangeNotifierProvider(
-        create: (_) => MvvmCounterViewModel(), child: MvvmCounterWidget()),
+    MainNavigationRoutesNames.mvvmCounter: (context) => MvvmCounterAuthWidget.create(),
   };
 
   Route<Object>? onGenerateRoute(RouteSettings settings) {
