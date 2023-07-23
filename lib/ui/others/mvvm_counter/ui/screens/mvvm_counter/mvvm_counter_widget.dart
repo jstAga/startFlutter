@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:start_flutter/ui/others/mvvm_counter/ui/mvvm_counter/mvvm_counter_view_model.dart';
+import 'package:start_flutter/ui/others/mvvm_counter/ui/screens/mvvm_counter/mvvm_counter_view_model.dart';
 
 class MvvmCounterWidget extends StatelessWidget {
   const MvvmCounterWidget({super.key});
+
+  static Widget create() {
+    return ChangeNotifierProvider(
+        create: (_) => MvvmCounterViewModel(), child: MvvmCounterWidget());
+  }
 
   @override
   Widget build(BuildContext context) {

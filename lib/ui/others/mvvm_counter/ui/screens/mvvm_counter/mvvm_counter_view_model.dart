@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:start_flutter/ui/others/mvvm_counter/ui/mvvm_counter/repository/mvvm_counter_repository.dart';
+import 'package:start_flutter/ui/others/mvvm_counter/ui/screens/mvvm_counter/repository/mvvm_counter_repository.dart';
 
 class MvvmCounterViewModelState {
   final String ageTitle;
