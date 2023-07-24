@@ -8,27 +8,35 @@ class MvvmCounterAuthViewModelState {
   final String authErrorTitle;
   final String login;
   final String password;
-  final MvvmCounterAuthButtonState authButtonState;
+  final bool isAuthInProcess;
 
-  MvvmCounterAuthViewModelState({
-    this.authErrorTitle = "",
-    this.login = "",
-    this.password = "",
-    this.authButtonState = MvvmCounterAuthButtonState.disabled,
-  });
+  MvvmCounterAuthButtonState get authButtonState {
+    if (isAuthInProcess) {
+      return MvvmCounterAuthButtonState.authInProcess;
+    } else if (login.isNotEmpty && password.isNotEmpty) {
+      return MvvmCounterAuthButtonState.canSubmit;
+    } else {
+      return MvvmCounterAuthButtonState.disabled;
+    }
+  }
+
+  MvvmCounterAuthViewModelState(
+      {this.authErrorTitle = "",
+      this.login = "",
+      this.password = "",
+      this.isAuthInProcess = false});
 
   MvvmCounterAuthViewModelState copyWith({
     String? authErrorTitle,
     String? login,
     String? password,
-    MvvmCounterAuthButtonState? authButtonState,
     bool? isAuthInProcess,
   }) {
     return MvvmCounterAuthViewModelState(
       authErrorTitle: authErrorTitle ?? this.authErrorTitle,
       login: login ?? this.login,
       password: password ?? this.password,
-      authButtonState: authButtonState ?? this.authButtonState,
+      isAuthInProcess: isAuthInProcess ?? this.isAuthInProcess,
     );
   }
 }
@@ -41,13 +49,13 @@ class MvvmCounterAuthViewModel extends ChangeNotifier {
 
   void changeLogin(String value) {
     if (_state.login == value) return;
-    _state.copyWith(login: value);
+    _state = _state.copyWith(login: value);
     notifyListeners();
   }
 
   void changePassword(String value) {
     if (_state.password == value) return;
-    _state.copyWith(password: value);
+    _state = _state.copyWith(password: value);
     notifyListeners();
   }
 
@@ -55,14 +63,20 @@ class MvvmCounterAuthViewModel extends ChangeNotifier {
     final login = _state.login;
     final password = _state.password;
     if (login.isEmpty || password.isEmpty) return;
+
+    _state = _state.copyWith(authErrorTitle: "", isAuthInProcess: true);
+    notifyListeners();
     try {
       await repository.auth(login, password);
+      _state = _state.copyWith(isAuthInProcess: false);
     } on AuthApiProviderIncorrectLoginDataError {
-      _state = _state.copyWith(authErrorTitle: "Incorrect login or password");
+      _state = _state.copyWith(
+          authErrorTitle: "Incorrect login or password",
+          isAuthInProcess: false);
     } catch (e) {
-      _state = _state.copyWith(authErrorTitle: "Unknown error");
-    } finally {
-      notifyListeners();
+      _state = _state.copyWith(
+          authErrorTitle: "Unknown error", isAuthInProcess: false);
     }
+    notifyListeners();
   }
 }
