@@ -49,7 +49,8 @@ class _AuthButton extends StatelessWidget {
     final child = authButtonState == MvvmCounterAuthButtonState.authInProcess
         ? const CircularProgressIndicator()
         : const Text("Log in");
-    return ElevatedButton(onPressed: onPressed, child: child);
+    return ElevatedButton(
+        onPressed: () => onPressed?.call(context), child: child);
   }
 }
 
@@ -67,6 +68,7 @@ class _ErrorTitle extends StatelessWidget {
 
 class _Password extends StatelessWidget {
   const _Password();
+
   @override
   Widget build(BuildContext context) {
     final viewModel = context.read<MvvmCounterAuthViewModel>();

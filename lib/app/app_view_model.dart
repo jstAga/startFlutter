@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:start_flutter/ui/main_navigation/main_navigation.dart';
 import 'package:start_flutter/ui/others/the_movie_db/data/local/data_provider/session_data_provider.dart';
 
-class AppModel {
+class AppViewModel {
   final _sessionDataProvider = SessionDataProvider();
   var _isAuth = false;
 
