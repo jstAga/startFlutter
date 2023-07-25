@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/app/app_model.dart';
+import 'package:start_flutter/app/app_view_model.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases/base_providers.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/movie_db_constants.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieHome/movie_home_model.dart';
@@ -21,7 +21,7 @@ class _MovieHomeWidgetState extends State<MovieHomeWidget> {
   void initState() {
     super.initState();
     final model = NotifierProvider.read<MovieHomeModel>(context);
-    final appModel = InheritedProvider.read<AppModel>(context);
+    final appModel = InheritedProvider.read<AppViewModel>(context);
     model?.onSessionExpired = () => appModel?.resetSession(context);
   }
 

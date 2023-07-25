@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:start_flutter/ui/main_navigation/main_navigation.dart';
 import 'package:start_flutter/ui/others/mvvm_counter/ui/data_providers/auth_api_data_provider/auth_api_provider.dart';
 import 'package:start_flutter/ui/others/mvvm_counter/ui/screens/mvvm_counter_auth/mvvm_counter_auth_repository/mvvm_counter_auth_repository.dart';
 
@@ -59,7 +60,7 @@ class MvvmCounterAuthViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> onAuthButtonPressed() async {
+  Future<void> onAuthButtonPressed(BuildContext context) async {
     final login = _state.login;
     final password = _state.password;
     if (login.isEmpty || password.isEmpty) return;
@@ -78,5 +79,7 @@ class MvvmCounterAuthViewModel extends ChangeNotifier {
           authErrorTitle: "Unknown error", isAuthInProcess: false);
     }
     notifyListeners();
+    Navigator.pushNamedAndRemoveUntil(
+        context, MainNavigationRoutesNames.mvvmCounter, (route) => false);
   }
 }

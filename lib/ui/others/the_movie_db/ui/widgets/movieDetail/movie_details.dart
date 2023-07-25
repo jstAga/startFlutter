@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:start_flutter/app/app_model.dart';
+import 'package:start_flutter/app/app_view_model.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/core/bases/base_providers.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieDetail/movie_details_main_info.dart';
 import 'package:start_flutter/ui/others/the_movie_db/ui/widgets/movieDetail/movie_details_model.dart';
@@ -17,7 +17,7 @@ class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
   void initState() {
     super.initState();
     final model = NotifierProvider.read<MovieDetailsModel>(context);
-    final appModel = InheritedProvider.read<AppModel>(context);
+    final appModel = InheritedProvider.read<AppViewModel>(context);
     model?.onSessionExpired = () => appModel?.resetSession(context);
   }
 

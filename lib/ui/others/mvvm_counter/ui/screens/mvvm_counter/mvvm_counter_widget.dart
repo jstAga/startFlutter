@@ -7,13 +7,15 @@ class MvvmCounterWidget extends StatelessWidget {
 
   static Widget create() {
     return ChangeNotifierProvider(
-        create: (_) => MvvmCounterViewModel(), child: MvvmCounterWidget());
+        create: (_) => MvvmCounterViewModel(),
+        child: const MvvmCounterWidget());
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
+    return Scaffold(
+      appBar: AppBar(actions: const [_LogoutBtn()]),
+      body: const SafeArea(
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -26,6 +28,18 @@ class MvvmCounterWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _LogoutBtn extends StatelessWidget {
+  const _LogoutBtn();
+
+  @override
+  Widget build(BuildContext context) {
+    final viewModel = context.read<MvvmCounterViewModel>();
+    return IconButton(
+        onPressed: () => viewModel.onLogoutButtonPressed(context),
+        icon: const Icon(Icons.logout));
   }
 }
 
