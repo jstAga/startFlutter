@@ -4,6 +4,8 @@ import 'package:start_flutter/ui/geek_tech/2month/hw7m2/hw7m2.dart';
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/data/remote/entity/love_response.dart';
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/ui/widgets/home/love_home_widget.dart';
 import 'package:start_flutter/ui/geek_tech/5month/love_calculator/ui/widgets/result/love_result_widget.dart';
+import 'package:start_flutter/ui/others/bloc_counter/ui/screens/bloc_counter/bloc_counter_widget.dart';
+import 'package:start_flutter/ui/others/bloc_counter/ui/screens/bloc_counter_auth/bloc_counter_auth_widget.dart';
 import 'package:start_flutter/ui/others/mvvm_counter/ui/screens/mvvm_counter/mvvm_counter_widget.dart';
 import 'package:start_flutter/ui/others/mvvm_counter/ui/screens/mvvm_counter_auth/mvvm_counter_auth_widget.dart';
 import 'package:start_flutter/ui/others/telegram_settings/telegram_settings.dart';
@@ -20,7 +22,8 @@ import 'package:start_flutter/ui/others/todo_list/ui/groups/groups_widget.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/task_from/task_form_widget.dart';
 import 'package:start_flutter/ui/others/todo_list/ui/tasks/tasks_widget.dart';
 import 'package:start_flutter/ui/others/work_with_hive/ui/work_with_hive_widget.dart';
-import 'package:start_flutter/ui/splash_screen/splash_screen_widget.dart';
+import 'package:start_flutter/ui/splash_screens/bloc_counter/bloc_counter_splash_screen_widget.dart';
+import 'package:start_flutter/ui/splash_screens/mvvm_counter/mvvm_counter_splash_screen_widget.dart';
 
 abstract class MainNavigationRoutesNames {
   //geekTech
@@ -50,12 +53,16 @@ abstract class MainNavigationRoutesNames {
   static const mvvmCounterAuth = "mvvmCounterAuth";
   static const mvvmCounter = "mvvmCounter";
 
-  static const splash = "splash";
+  static const blocCounterAuth = "blocCounterAuth";
+  static const blocCounter = "blocCounter";
+
+  static const mvvmCounterSplash = "mvvmSplash";
+  static const blocCounterSplash = "blocSplash";
 }
 
 class MainNavigation {
   // final initialRoute = MainNavigationRoutesNames.authMovieDb;
-  final initialRoute = MainNavigationRoutesNames.splash;
+  final initialRoute = MainNavigationRoutesNames.blocCounterSplash;
 
   String initialRoute2(bool isAuth) => isAuth //movieDb
       ? MainNavigationRoutesNames.homeMovieDb
@@ -91,9 +98,14 @@ class MainNavigation {
         const WorkWithHiveWidget(),
 
     //mvvm counter
-    MainNavigationRoutesNames.splash: (context) =>  SplashScreenWidget.create(),
+    MainNavigationRoutesNames.mvvmCounterSplash: (context) =>  MvvmCounterSplashScreenWidget.create(),
     MainNavigationRoutesNames.mvvmCounter: (context) => MvvmCounterWidget.create(),
     MainNavigationRoutesNames.mvvmCounterAuth: (context) => MvvmCounterAuthWidget.create(),
+
+    //bloc counter
+    MainNavigationRoutesNames.blocCounterSplash: (context) =>  BlocCounterSplashScreenWidget.create(),
+    MainNavigationRoutesNames.blocCounter: (context) => BlocCounterWidget.create(),
+    MainNavigationRoutesNames.blocCounterAuth: (context) => BlocCounterAuthWidget.create(),
   };
 
   Route<Object>? onGenerateRoute(RouteSettings settings) {
